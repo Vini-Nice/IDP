@@ -24,9 +24,9 @@ A coordenadora pedagógica **Profa. Mariana Souza** sugeriu a criação de um po
 
 ## 🔧 Tecnologias Utilizadas
 
-- **Frontend:** HTML5, CSS3, JavaScript, [Next.js]
-- **Backend:** Node.js, Express
-- **Banco de Dados: MYSQL
+- Frontend:** HTML5, CSS3, JavaScript, [Next.js]
+- Backend:** Node.js, Express
+- Banco de Dados: MYSQL
 
 
 ---
