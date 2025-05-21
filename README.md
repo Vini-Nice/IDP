@@ -64,7 +64,11 @@ npm run dev
 👨‍💻 Desenvolvido por: 
 
 Maria Clara Reginato
+
+
 Richard Sousa Garcia
+
+
 Vinicius Santana Moreira
 
 
