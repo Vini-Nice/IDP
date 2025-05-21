@@ -1,0 +1,69 @@
+/* Fundo*/
+
+body::before {
+    content: "";
+    opacity: 0.2;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-image: url(../../public/geral.imgs/fundo.PNG);
+    background-repeat: no-repeat;
+    background-position: top;
+    z-index: -1;
+}
+
+/* Título */
+
+.tituloes {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 80px;
+}
+
+/* Textos */
+
+.textoes {
+    
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+
+    font-size: xx-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Fromulário */
+
+.formes {
+    padding: 20px;
+    background-color: white;
+    margin-top: 600px;
+}
+
+.inputes {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: medium;
+    width: 300px;
+    height: 60px;
+}
+
+.botaoes {
+    text-align: center;
+    font-size: medium;
+    width: 200px;
+    height: 40px;
+    background-color: aliceblue;
+    margin-left: 600px;
+}

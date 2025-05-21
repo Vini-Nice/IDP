@@ -1,10 +1,10 @@
-
+import SocialMedia from "./socialmidia"
 
 export default function Footer() {
     return (
         <>
         <footer className="bg-blue-600 w-full flex border-t-2 border-b-2"> 
-            <div className="relative flex p-3 gap-5"> {/* div pai*/}
+            <div className="relative flex p-3 gap-5 "> {/* div pai*/}
 
                 <div className="w-[100px] m-4 me-8"> {/* div da logo*/}
                     <img src="/imgs/imgsteste/ch1.jpg" alt="" />
@@ -53,6 +53,9 @@ export default function Footer() {
                     <p>Galeria de Fotos e Vídeos</p>
                 </div>
 
+                <div>
+                    <SocialMedia></SocialMedia>
+                </div>
 
             </div>
         </footer>

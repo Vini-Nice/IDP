@@ -14,15 +14,16 @@ const Carousel = ({ images }) => {
   };
 
   return (
-    <div className="relative w-full max-w-4xl h-3xl m-4 overflow-hidden">
+    <div className="relative w-full max-w-3/4 h-80 m-4 overflow-hidden rounded-2xl">
       {/* Carousel Images */}
-      <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+      <div className="flex transition-transform duration-3000 h-full" style={{ transform: `translateX(-${currentIndex * (100 / images.length)}%)`, width: `${images.length * 100}%` }}>
         {images.map((image, index) => (
           <img
             key={index}
             src={image}
             alt={`Slide ${index}`}
-            className="w-full flex-shrink-0"
+            style={{ width: `${100 / images.length}%` }}
+            className="h-full cover flex-shrink-0"
           />
         ))}
       </div>
@@ -30,13 +31,13 @@ const Carousel = ({ images }) => {
       {/* Navigation Buttons */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-600 text-white text-[24px] p-2 rounded-full hover:bg-gray-500"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-700 text-white text-[18px] p-2 rounded-full hover:bg-gray-500"
       >
         &#8592;
       </button>
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-600 text-white text-[24px] p-2 rounded-full hover:bg-gray-500"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-700 text-white text-[18px] p-2 rounded-full hover:bg-gray-500"
       >
         &#8594;
       </button>

@@ -5,9 +5,9 @@ import CardNoticies from "./components/cardsNoticies/cardsNoticies";
 export default function Home() {
   const images = [
     "/imgs/imgsteste/ch1.jpg",
-    "/imgs/imgsteste/ch1.jpg",
-    "/imgs/imgsteste/ch1.jpg",
-    "/imgs/imgsteste/ch1.jpg",
+    "/imgs/imgsteste/ch2.jpg",
+    "/imgs/imgsteste/ch3.jpg",
+    "/imgs/imgsteste/ch5.jpg",
   ];
 
   return (
@@ -19,7 +19,7 @@ export default function Home() {
 
       <br />
 
-      <div className="flex w-full items-center justify-center-safe">
+      <div className="flex w-full items-center justify-center-safe p-3">
         <div className="flex max-w-1/3 text-center gap-4 justify-center">
           {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
           <div className="">
