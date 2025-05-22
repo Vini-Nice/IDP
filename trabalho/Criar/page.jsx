@@ -1,3 +1,5 @@
+export default funciton Criar
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -74,29 +76,6 @@
         <pre id="responseContent"></pre>
     </div>
 
-    <script>
-        document.getElementById('noticiaForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-
-            const form = document.getElementById('noticiaForm');
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch('http://localhost:3000/livros', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer SENHA_SECRETA' // Substitua pelo seu token JWT
-                    },
-                    body: formData
-                });
-
-                const data = await response.json();
-                document.getElementById('responseContent').textContent = JSON.stringify(data, null, 2);
-            } catch (error) {
-                console.error('Erro:', error);
-                document.getElementById('responseContent').textContent = 'Erro ao enviar os dados.';
-            }
-        });
-    </script>
+    
 </body>
 </html>
