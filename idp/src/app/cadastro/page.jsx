@@ -3,21 +3,35 @@
 
 
  // Importações 
+ 
 
 import '../cadastro/cadastro.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+
+// UseStates e confirmação de senha
+
 export default function Cadastro () {
     
     const [cpf, setCpf] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha]  = useState('');
+    const [csenha, setCsenha] = useState('');
     const router = useRouter();
 
     const cadastrar = async (e) => {
         e.preventDefault();
+
+
+        if(senha !== csenha) {
+            alert('As senhas não coincidem.');
+            return;
+        }
+
+           
+
         try {
             const res = await axios.post('http://localhost:3001/api/cadastrar', {
                 cpf,
@@ -90,10 +104,22 @@ export default function Cadastro () {
                     value={senha}
                     onChange={(e) => setSenha(e.target.value)}
                 />
+
+               <br></br><br></br>
+
+                <input
+                   className='csenha'
+                   type ="password"
+                   placeholder='Confime sua senha'
+                   value={csenha}
+                   onChange={(e) => setCsenha(e.target.value)} 
+                />
                 
                 <br></br><br></br>
                <button className='botao2' type='submit'>Cadastrar</button>
             </form>
+            <br></br><br></br>
         </div>
+        
     );
 }

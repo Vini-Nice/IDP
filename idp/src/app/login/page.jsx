@@ -3,23 +3,32 @@
 
  // Importações 
 
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation'; 
 import './login.css';
 
+
+// UseStates e confirmação de senha
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [csenha, setCsenha] = useState('');
   const router = useRouter(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+    if(senha !== csenha) {
+      alert('As senhas não coincidem.')
+        return;
+    }
     
   
 
+    
 
     try {
       const resposta = await axios.post('http://localhost:3001/login', {
@@ -76,6 +85,8 @@ export default function Login() {
         <h1 className="titulol">Sua melhor experiência escolar.</h1>
         
         <hr className="linha-divisoria" />
+
+        <br></br>
          
          <h2 className='texto1'>Faça seu login para entrar 
 e explorar as novidades do  Colégio técnico 
@@ -90,16 +101,30 @@ Instituto Dom Pedro II </h2>
 <div className='form'>
 
         <form className="form-login" onSubmit={handleSubmit}>
+
+
           <label><br></br>
             <i>Seu email:<br></br></i>
             <input className='input' type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </label>
+
+
             <br></br><br></br>
           <label>
             <i>Sua senha: <br></br></i>
             <input className='input' type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
           </label>
-               <br></br><br></br>
+          <br></br><br></br>
+
+
+          <label>
+            <i>Confirme sua senha: <br></br></i>
+            <input className='input' type="password" value={csenha} onChange={(e) => setCsenha(e.target.value)} required />
+          </label>
+
+
+
+         <br></br><br></br>
           <button className='botao1' type="submit">Entrar</button>
           <br></br><br></br><br></br>
 
@@ -116,6 +141,7 @@ Instituto Dom Pedro II </h2>
    
         </form>
 </div>
+<br></br><br></br>
        
 </div>
   </div>
