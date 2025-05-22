@@ -15,7 +15,7 @@ export default function Header() {
 
 
 
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><a href="" className="text-neutral-950">Sign In</a></button>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><a href="./login/page" className="text-neutral-950">Sign In</a></button>
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><a href="" className="text-neutral-950">Sign Up</a> </button>
                     </ul>
                 </div>

@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation'; 
-import './login/login.css';
+import './login.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
