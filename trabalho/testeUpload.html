@@ -1,11 +1,9 @@
-export default funciton Criar
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste de Upload de Livro</title>
+    <title>Edição da Noticia</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,6 +74,32 @@ export default funciton Criar
         <pre id="responseContent"></pre>
     </div>
 
-    
+    <script>
+        document.getElementById('noticiaForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('noticiaForm');
+            const formData = new FormData(form);
+
+            console.log(formData.value)
+
+            try {
+                const response = await fetch('http://localhost:3000/noticias', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'SEGREDO' // Substitua pelo seu token JWT
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+                document.getElementById('responseContent').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('responseContent').textContent = 'Erro ao enviar os dados.';
+            }
+        });
+    </script>
+
 </body>
 </html>

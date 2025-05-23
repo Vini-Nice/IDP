@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edição de Livro</title>
+    <title>Edição da Noticia</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,25 +45,31 @@
 </head>
 <body>
 
-    <h1>Editar Livro</h1>
+    <h1>Editar Noticia</h1>
 
-    <form id="livroForm">
-        <label for="id">ID do Livro:</label>
-        <input type="text" id="id" name="id" required placeholder="Digite o ID do livro que você deseja editar" readonly>
+    <form action="" id="noticiaForm">
+        <label for="id_noticias">ID da Noticia:</label>
+        <input type="number" id="id_noticias" name="id_noticias" required placeholder="Digite o ID da noticia que você deseja editar." >
 
         <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo">
+        <input type="text" id="titulo" name="titulo" required>
 
         <label for="descricao">Descrição:</label>
-        <input type="text" id="descricao" name="descricao">
+        <input type="text" id="descricao" name="descricao" required>
 
-        <label for="isbn">ISBN:</label>
-        <input type="text" id="isbn" name="isbn">
+        <label for="data">Data da Postagem:</label>
+        <input type="date" id="data" name="data" required>
 
-        <label for="capa">Nova Capa do Livro:</label>
-        <input type="file" id="capa" name="capa" accept="image/*">
+        <label for="imagem">Imagem da Postagem:</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" required>
 
-        <button type="submit">Atualizar Livro</button>
+        <label for="usuario">ID do Usuário:</label>
+        <input type="text" id="usuario" name="usuario" required>
+
+        <label for="categoria">Categoria da Noticia:</label>
+        <input type="text" id="categoria" name="categoria" required>
+
+        <button type="submit">Atualizar Noticia.</button>
     </form>
 
     <div id="response">
@@ -81,38 +87,45 @@
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
 
-        const livroId = getParameterByName('id');
+        const noticiaId = getParameterByName('id_noticias');
 
-        if (!livroId) {
-            document.body.innerHTML = '<p style="color: red;">ID do livro não especificado na URL. Use: testeUpdate.html?id=SEU_ID</p>';
+        if (!noticiaId) {
+            document.body.innerHTML = '<p style="color: red;">ID da noticia não especificado na URL. Use: testeUpdate.html?id=SEU_ID</p>';
         } else {
-            document.getElementById('id').value = livroId;
+            document.getElementById('id_noticias').value = noticiaId;
 
-            fetch(`http://localhost:3000/livros/${livroId}`)
+            fetch(`http://localhost:3000/noticias/${noticiaId}`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('titulo').value = data.titulo || '';
                     document.getElementById('descricao').value = data.descricao || '';
-                    document.getElementById('isbn').value = data.isbn || '';
+                    document.getElementById('data').value = data.data.substring(0, 10) || '';
+                    document.getElementById('imagem').value = data.imagem || '';
+                    document.getElementById('usuario').value = data.usuario || '';
+                    document.getElementById('categoria').value = data.categoria || '';
                 })
                 .catch(error => {
-                    console.error('Erro ao carregar as informações do livro:', error);
-                    document.getElementById('responseContent').textContent = 'Erro ao carregar as informações do livro.';
+                    console.error('Erro ao carregar as informações do noticia:', error);
+                    document.getElementById('responseContent').textContent = 'Erro ao carregar as informações do noticia.';
                 });
 
-            document.getElementById('livroForm').addEventListener('submit', async function(event) {
+            document.getElementById('noticiaForm').addEventListener('submit', async function(event) {
                 event.preventDefault();
 
-                const form = document.getElementById('livroForm');
+                const dataInput = document.getElementById('data');
+                dataInput.value = dataInput.value.substring(0, 10);
+
+                const form = document.getElementById('noticiaForm');
                 const formData = new FormData(form);
 
                 try {
-                    const response = await fetch(`http://localhost:3000/livros/${livroId}`, {
+                    const response = await fetch(`http://localhost:3000/noticias/${noticiaId}`, {
                         method: 'PUT',
                         headers: {
-                            'Authorization': `Bearer SENHA_SECRETA` // Substitua pelo seu token JWT
+                            'Authorization': `SEGREDO` // Substitua pelo seu token JWT
                         },
                         body: formData
+                        
                     });
 
                     const data = await response.json();
