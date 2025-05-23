@@ -162,6 +162,7 @@ body::before {
 
 
 @media (max-width: 768px) {
+
   .titulol {
     font-size: 40px;
   }
@@ -190,7 +191,7 @@ body::before {
 @media (max-width: 480px) {
 
   .titulol {
-    font-size: 30px;
+    font-size: 20px;
   }
 
   .form-login {
@@ -218,4 +219,9 @@ body::before {
   .botao1 {
     width: 100px;
   }
+
+  .cadastro, .esqsenha {
+    font-size: 0.9rem;
+  }
 }
+
