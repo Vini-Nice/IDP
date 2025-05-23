@@ -1,0 +1,37 @@
+[
+  {
+    "cpf": "45678990",
+    "email": "maria@gremio.com",
+    "senha": "666"
+  },
+  {
+    "cpf": "76898765",
+    "email": "mariaa@gestao.com",
+    "senha": "444"
+  },
+  {
+    "cpf": "45678998780",
+    "email": "maria@aluno.com",
+    "senha": "88"
+  },
+  {
+    "cpf": "4356789",
+    "email": "maria@professor.com",
+    "senha": "88"
+  },
+  {
+    "cpf": "456456",
+    "email": "iooi@aluno.com",
+    "senha": "123123"
+  },
+  {
+    "cpf": "45545",
+    "email": "jjjj@aluno.com",
+    "senha": "123"
+  },
+  {
+    "cpf": "456456789080",
+    "email": "teste@aluno.com",
+    "senha": "55"
+  }
+]

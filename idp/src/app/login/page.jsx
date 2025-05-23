@@ -1,25 +1,34 @@
-"use client";
+'use client';
 
 
  // Importações 
-
 
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation'; 
 import './login.css';
 
-export default function Login() {
+
+// UseStates e confirmação de senha
+
+export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [csenha, setCsenha] = useState('');
   const router = useRouter(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+    if(senha !== csenha) {
+      alert('As senhas não coincidem.')
+        return;
+    }
     
   
 
+    
 
     try {
       const resposta = await axios.post('http://localhost:3001/login', {
@@ -44,14 +53,14 @@ export default function Login() {
    const emailUsuario = resposta.data.email || email;
 
    if (emailUsuario.endsWith('@aluno.com')) {
-     router.push('/home1');
+     router.push('/');
    } else if (emailUsuario.endsWith('@gestao.com')) {
-     router.push('/home2');
+     router.push('/');
    } else if (
      emailUsuario.endsWith('@gremio.com') ||
      emailUsuario.endsWith('@professor.com')
    ) {
-     router.push('/home3');
+     router.push('/');
    } else {
      alert('Você não pode ter acesso a esse site infelizmente, só pessoas que estudam ou trabalham no Colégio.');
    }
@@ -69,13 +78,17 @@ export default function Login() {
 
  // Títulos, textos e formulários
 
-  return (
-    <div className="l2">
+  return <div>
+
+
+<div className="l2">
       <div className="final-container" >
         <br></br>
         <h1 className="titulol">Sua melhor experiência escolar.</h1>
         
         <hr className="linha-divisoria" />
+
+        <br></br>
          
          <h2 className='texto1'>Faça seu login para entrar 
 e explorar as novidades do  Colégio técnico 
@@ -90,16 +103,30 @@ Instituto Dom Pedro II </h2>
 <div className='form'>
 
         <form className="form-login" onSubmit={handleSubmit}>
+
+
           <label><br></br>
             <i>Seu email:<br></br></i>
             <input className='input' type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </label>
+
+
             <br></br><br></br>
           <label>
             <i>Sua senha: <br></br></i>
             <input className='input' type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
           </label>
-               <br></br><br></br>
+          <br></br><br></br>
+
+
+          <label>
+            <i>Confirme sua senha: <br></br></i>
+            <input className='input' type="password" value={csenha} onChange={(e) => setCsenha(e.target.value)} required />
+          </label>
+
+
+
+         <br></br><br></br>
           <button className='botao1' type="submit">Entrar</button>
           <br></br><br></br><br></br>
 
@@ -116,10 +143,19 @@ Instituto Dom Pedro II </h2>
    
         </form>
 </div>
+<br></br><br></br>
        
 </div>
   </div>
 
-      
-  );
+
+
+
+
+
+  </div>;
 }
+
+
+
+

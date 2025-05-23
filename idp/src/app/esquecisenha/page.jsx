@@ -1,23 +1,39 @@
-"use client";
+'use client';
 
 // Importações
 
 import axios from "axios";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import "./esqsenha.css"; 
+import "./esquecisenha.css"; 
+
+
+
+
+// UseStates e confirmação de senha
 
 export default function EsqueciSenha() {
   const [email, setEmail] = useState("");
   const [novaSenha, setNovaSenha] = useState("");
+  const [csenha, setCsenha] = useState("");
   const router = useRouter();
 
   const handleRedefinirSenha = async (e) => {
     e.preventDefault();
 
+
+    if (csenha !== novaSenha) {
+      alert('As senhas não coincidem.');
+      return;
+    }
+
+
+
+
+    // Validação de domínio institucional
+
     try {
 
-      // Validação de domínio institucional
 
       const dominiosPermitidos = ["@aluno.com", "@gestao.com", "@gremio.com", "@professor.com"];
       const emailValido = dominiosPermitidos.some((dominio) => email.endsWith(dominio));
@@ -56,6 +72,8 @@ export default function EsqueciSenha() {
           required
         />
 
+       <br></br>
+
         <input
           className="inputes"
           type="password"
@@ -65,10 +83,27 @@ export default function EsqueciSenha() {
           required
         />
 
+
+          <br></br>
+
+          <input
+          className="inputes"
+          type="password"
+          placeholder="Confime sua nova senha"
+          value={csenha}
+          onChange={(e) => setCsenha(e.target.value)}
+          required
+        /> 
+
+
+
+        
+
         <button className="botaoes" type="submit">
           Redefinir senha
         </button>
       </form>
+      <br></br>
     </div>
   );
 }
