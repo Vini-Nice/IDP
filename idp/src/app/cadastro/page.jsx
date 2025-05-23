@@ -39,7 +39,7 @@ export default function Cadastro () {
                 senha,
             });
             alert(res.data.mensagem);
-            router.push('/');
+            router.push('./login');
         } catch (err) {
             alert(err.response?.data?.erro || 'Erro no cadastro');
         }
@@ -47,15 +47,14 @@ export default function Cadastro () {
 
 
 
+
+    // Título, textos e formulário
+    
+
     return (
 
-
-        
-
-
-         // Título, textos e formulário
-
-
+       
+    
 
         <div className='formulario'>
             
@@ -120,6 +119,8 @@ export default function Cadastro () {
             </form>
             <br></br><br></br>
         </div>
-        
+  
+      
     );
 }
+

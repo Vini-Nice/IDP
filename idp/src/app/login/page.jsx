@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 
  // Importações 
@@ -11,7 +11,7 @@ import './login.css';
 
 // UseStates e confirmação de senha
 
-export default function Login() {
+export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [csenha, setCsenha] = useState('');
@@ -53,14 +53,14 @@ export default function Login() {
    const emailUsuario = resposta.data.email || email;
 
    if (emailUsuario.endsWith('@aluno.com')) {
-     router.push('/home1');
+     router.push('/');
    } else if (emailUsuario.endsWith('@gestao.com')) {
-     router.push('/home2');
+     router.push('/');
    } else if (
      emailUsuario.endsWith('@gremio.com') ||
      emailUsuario.endsWith('@professor.com')
    ) {
-     router.push('/home3');
+     router.push('/');
    } else {
      alert('Você não pode ter acesso a esse site infelizmente, só pessoas que estudam ou trabalham no Colégio.');
    }
@@ -78,8 +78,10 @@ export default function Login() {
 
  // Títulos, textos e formulários
 
-  return (
-    <div className="l2">
+  return <div>
+
+
+<div className="l2">
       <div className="final-container" >
         <br></br>
         <h1 className="titulol">Sua melhor experiência escolar.</h1>
@@ -146,6 +148,14 @@ Instituto Dom Pedro II </h2>
 </div>
   </div>
 
-      
-  );
+
+
+
+
+
+  </div>;
 }
+
+
+
+
