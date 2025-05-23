@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 import cors from 'cors';
 
+
 import noticiasRotas from './routes/noticiasRotas.js';
 import authRotas from './routes/authRotas.js';
 
@@ -27,5 +28,12 @@ app.use((req, res) => {
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${3000}`);
+
+    
+
+
+
 });
+
+
 
