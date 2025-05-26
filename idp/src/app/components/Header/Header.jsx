@@ -3,13 +3,18 @@ export default function Header() {
         <>
             <nav className="bg-blue-600 border-t-2 border-b-2">
                 <div className="flex justify-between items-center py-5 px-7 ">
-                    <form className="text-neutral-900" action="">
-                        <label htmlFor="">Opções</label>
-                        <select name="" id="">
-                            <option value="">Teste</option>
-                            <option value="">Tste 2</option>
-                        </select>
-                    </form>
+                    
+                    <div>
+                        <h2>IDP NEWS</h2>
+                    </div>
+                    
+                    <div>
+                        <ul className="flex gap-8">
+                            <li><a href="">Notícias</a></li>
+                            <li><a href="../avisos">Avisos</a></li>
+                            <li><a href="">Eventos</a></li>
+                        </ul>
+                    </div>
                     {/* <img src="" alt="" /> */}
                     <ul className="flex gap-4">
 
