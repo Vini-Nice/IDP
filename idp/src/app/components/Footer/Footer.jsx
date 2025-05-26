@@ -14,7 +14,7 @@ export default function Footer() {
                     <h2 className="capitalize font-bold">Colégio Instituto Dom Pedro II</h2>
                     <p>Localização- rua sei lá aonde blablabla</p>
                     <p className="border-b-1">Horário de atendimento - 7 horas às 17 horas</p>
-                    <h4 className="font-bold">MAIS</h4>
+                    <h4 className="font-bold font-destaque">MAIS</h4>
                     <p>Nossa História</p>
                     <p>Gestão</p>
                     <p>Missão, visão e valores</p>

@@ -19,7 +19,7 @@ export default function Home() {
 
       <br />
 
-      <div className="flex w-full items-center justify-center-safe p-3">
+      <div className="flex w-full items-center justify-center-safe p-3 font-principal">
         <div className="flex max-w-1/3 text-center gap-4 justify-center">
           {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
           <div className="">

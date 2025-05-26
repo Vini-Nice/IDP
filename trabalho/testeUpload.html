@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste de Upload de Livro</title>
+    <title>Edição da Noticia</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,11 +81,13 @@
             const form = document.getElementById('noticiaForm');
             const formData = new FormData(form);
 
+            console.log(formData.value)
+
             try {
-                const response = await fetch('http://localhost:3000/livros', {
+                const response = await fetch('http://localhost:3000/noticias', {
                     method: 'POST',
                     headers: {
-                        'Authorization': 'Bearer SENHA_SECRETA' // Substitua pelo seu token JWT
+                        'Authorization': 'SEGREDO' // Substitua pelo seu token JWT
                     },
                     body: formData
                 });
@@ -98,5 +100,6 @@
             }
         });
     </script>
+
 </body>
 </html>

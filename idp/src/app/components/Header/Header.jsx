@@ -2,7 +2,7 @@ export default function Header() {
     return (
         <>
             <nav className="bg-blue-600 border-t-2 border-b-2">
-                <div className="flex justify-between items-center py-5 px-7 ">
+                <div className="flex justify-between items-center py-5 px-7">
                     
                     <div>
                         <h2>IDP NEWS</h2>
