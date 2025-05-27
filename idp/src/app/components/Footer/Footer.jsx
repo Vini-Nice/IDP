@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <>
         <footer className="bg-blue-600 w-full flex border-t-2 border-b-2 max-h-52"> 
-            <div className="relative flex p-4 gap-[50px] "> {/* div pai*/}
+            <div className="relative flex p-4 gap-6 "> {/* div pai*/}
 
                 <div className="w-[100px] m-4 me-8"> {/* div da logo*/}
                     <img src="/imgs/imgsteste/ch1.jpg" alt="" />
@@ -31,7 +31,7 @@ export default function Footer() {
                 </div>
 
                 <div>
-                    <h2 className="capitalize font-bold grid ">Links Úteis</h2> <br />
+                    <h2 className="capitalize font-bold ">Links Úteis</h2> <br />
                     
                     <p>Calendário Escolar</p>
                     <p>Horário das Aulas</p>
