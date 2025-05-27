@@ -3,8 +3,8 @@ import SocialMedia from "./socialmidia"
 export default function Footer() {
     return (
         <>
-        <footer className="bg-blue-600 w-full flex border-t-2 border-b-2 max-h-52"> 
-            <div className="relative flex p-4 gap-6 "> {/* div pai*/}
+        <footer className="bg-blue-600 w-full flex flex-wrap border-t-2 border-b-2 max-h-52"> 
+            <div className="relative flex p-4 gap-6"> {/* div pai*/}
 
                 <div className="w-[100px] m-4 me-8"> {/* div da logo*/}
                     <img src="/imgs/imgsteste/ch1.jpg" alt="" />

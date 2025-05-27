@@ -2,12 +2,30 @@ import Image from "next/image";
 import Carousel from "./components/Carousel/Carousel";
 import CardNoticies from "./components/cardsNoticies/cardsNoticies";
 
+import { Roboto, Merriweather, Playfair_Display } from 'next/font/google';
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
+
+
 export default function Home() {
   const images = [
-    "/imgs/imgsteste/ch1.jpg",
-    "/imgs/imgsteste/ch2.jpg",
-    "/imgs/imgsteste/ch3.jpg",
-    "/imgs/imgsteste/ch5.jpg",
+    "/imgs/imgsteste/futsal.jpeg",
+    "/imgs/imgsteste/junina.png",
+    "/imgs/imgsteste/exame.jpg",
+    "/imgs/imgsteste/reuniao.png",
   ];
 
   return (
@@ -24,11 +42,11 @@ export default function Home() {
           {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
           <div className="">
             <div>
-              <h2>Título noticia</h2>
+              <h2 className={`${merriweather.className}`}>Título noticia</h2>
             </div>
             <div className="w-100">
               <Image
-                src={"/imgs/imgsteste/ch1.jpg"}
+                src={"/imgs/imgsteste/auditorio.jpg"}
                 alt={"Foto noticia"}
                 className="object-cover shadow-black shadow-md"
                 quality={100}
@@ -37,7 +55,7 @@ export default function Home() {
                 height={200}
               />
             </div>
-            <div>
+            <div className={`${roboto.className}`}>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod
               quis minus soluta tempore ab eligendi molestiae, excepturi, eius
               alias ipsa voluptatibus natus voluptate quibusdam possimus
@@ -50,11 +68,11 @@ export default function Home() {
 
           <div className="">
             <div>
-              <h2>Título noticia</h2>
+              <h2 className={`${merriweather.className}`}>Título noticia</h2>
             </div>
             <div className="w-100"> 
               <Image
-                src={"/imgs/imgsteste/ch1.jpg"}
+                src={"/imgs/imgsteste/biblioteca.jpg"}
                 alt={"Foto noticia"}
                 className="object-cover shadow-black shadow-md"
                 quality={100}
@@ -63,7 +81,7 @@ export default function Home() {
                 height={200}
               />
             </div>
-            <div>
+            <div className={`${roboto.className}`}>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod
               quis minus soluta tempore ab eligendi molestiae, excepturi, eius
               alias ipsa voluptatibus natus voluptate quibusdam possimus
@@ -73,11 +91,11 @@ export default function Home() {
           {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
           <div>
             <div>
-              <h2>Título noticia</h2>
+              <h2 className={`${merriweather.className}`}>Título noticia</h2>
             </div>
             <div className="w-100">
               <Image
-                src={"/imgs/imgsteste/ch1.jpg"}
+                src={"/imgs/imgsteste/futsal.jpeg"}
                 alt={"Foto noticia"}
                 className="object-cover shadow-black shadow-md"
                 quality={100}
@@ -86,7 +104,7 @@ export default function Home() {
                 height={200}
               />
             </div>
-            <div>
+            <div className={`${roboto.className}`}>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod
               quis minus soluta tempore ab eligendi molestiae, excepturi, eius
               alias ipsa voluptatibus natus voluptate quibusdam possimus
