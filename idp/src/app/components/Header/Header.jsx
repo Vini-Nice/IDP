@@ -1,7 +1,24 @@
+import { Roboto, Merriweather, Playfair_Display } from 'next/font/google';
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
+
 export default function Header() {
     return (
         <>
-            <nav className="bg-blue-600 border-t-2 border-b-2">
+            <nav className={`${merriweather.className} bg-blue-600 border-t-2 border-b-2`}>
                 <div className="flex justify-between items-center py-5 px-7">
                     
                     <div>
