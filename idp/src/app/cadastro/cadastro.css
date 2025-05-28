@@ -1,7 +1,7 @@
 /* Fundo */
 
 body::before {
-    background-image: url(../../../public/imgs/imgsteste/fundo.PNG);
+    background-image: url(../../../public/geral.imgs/fundo.PNG);
     opacity: 0.2;
     content: "";
     position: fixed;
