@@ -28,27 +28,31 @@ export default function Home() {
     "/imgs/imgsteste/reuniao.png",
   ];
 
+  
+
   return (
     <>
       {/* ----------------------- CARROSSEL --------------------------------------------*/}
-      <div className="h-full min-h-48 flex items-center justify-center bg-gray-100">
+      
+      <div className="h-full min-h-48 flex flex-col items-center justify-center p-2 bg-gray-100">
+        <h2 className={`${merriweather.className} text-black italic font-bold`}>Principais notícias</h2>
         <Carousel images={images} />
       </div>
 
-      <br />
+      <br className="bg-gray-100" />
 
-      <div className="flex w-full items-center justify-center-safe p-3 font-principal">
+      <div className="flex w-full items-center justify-center-safe p-3 bg-gray-100 text-black">
         <div className="flex max-w-1/3 text-center gap-4 justify-center">
           {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
           <div className="">
             <div>
               <h2 className={`${merriweather.className}`}>Título noticia</h2>
             </div>
-            <div className="w-100">
+            <div className="w-100 ">
               <Image
                 src={"/imgs/imgsteste/auditorio.jpg"}
                 alt={"Foto noticia"}
-                className="object-cover shadow-black shadow-md"
+                className="w-[200px] h-[200px] object-cover shadow-black shadow-md"
                 quality={100}
                 layout="responsive"
                 width={200}
@@ -74,7 +78,7 @@ export default function Home() {
               <Image
                 src={"/imgs/imgsteste/biblioteca.jpg"}
                 alt={"Foto noticia"}
-                className="object-cover shadow-black shadow-md"
+                className="w-[200px] h-[200px] object-cover shadow-black shadow-md"
                 quality={100}
                 layout="responsive"
                 width={200}
@@ -97,7 +101,7 @@ export default function Home() {
               <Image
                 src={"/imgs/imgsteste/futsal.jpeg"}
                 alt={"Foto noticia"}
-                className="object-cover shadow-black shadow-md"
+                className="w-[200px] h-[200px] object-cover shadow-black shadow-md"
                 quality={100}
                 layout="responsive"
                 width={200}
