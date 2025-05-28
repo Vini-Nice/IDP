@@ -39,15 +39,15 @@ const criarNoticiaController = async (req, res) => {
             imagemPath = req.file.path.replace(__dirname.replace('\\constrollers', ''), '');
         }
         // requisição do conteudo enviado pelo criador da noticia
-        const noticiaData =
-                {
-                    titulo: titulo,
-                    descricao: descricao,
-                    data: data,
-                    imagem: imagem,
-                    usuario: usuario,
-                    categoria: categoria
-                };
+        const noticiaData = 
+        {
+            titulo,
+            descricao,
+            data,
+            imagem: imagemPath, // use o valor extraído corretamente
+            usuario,
+            categoria
+          };
 
         const noticiaId = await criarNoticia(noticiaData);
         res.status(201).json({ mensagem: 'Noticia criada com sucesso', noticiaId });
@@ -61,7 +61,7 @@ const criarNoticiaController = async (req, res) => {
 const atualizarNoticiaController = async (req, res) => {
     try {
         const noticiaId = req.params.id;
-        const { titulo, descricao, data, imagem, usuario, categoria } = req.body;
+        const { id_noticias, titulo, descricao, data, imagem, usuario, categoria } = req.body;
         let imagemPath = null;
         // req requisita algo do servidor e file indica que essa requisição irá possuir um arquivo enviado pelo usuário.
         if (req.file) {
@@ -69,15 +69,16 @@ const atualizarNoticiaController = async (req, res) => {
             imagemPath = req.file.path.replace(__dirname.replace('\\constrollers', ''), '');
         }
         // requisição do conteudo enviado pelo criador da noticia
-        const noticiaData =
-                {
-                    titulo: titulo,
-                    descricao: descricao,
-                    data: data,
-                    imagem: imagem,
-                    usuario: usuario,
-                    categoria: categoria
-                };
+        const noticiaData = 
+        {
+            id_noticias,
+            titulo,
+            descricao,
+            data,
+            imagem: imagemPath, // use o valor extraído corretamente
+            usuario,
+            categoria
+          };
 
         await atualizarNoticia(noticiaId, noticiaData);
         res.status(201).json({ mensagem: 'Noticia atualizada com sucesso.' });

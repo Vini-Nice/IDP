@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
     }
 });
 // cria o local onde irá ser armazendado os arquivos
-const upload = multer({ storage: storage});
+const upload = multer({ storage: storage });
 
 const router = express.Router();
 

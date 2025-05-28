@@ -14,7 +14,7 @@ const Carousel = ({ images }) => {
   };
 
   return (
-    <div className="relative w-full max-w-3/4 h-80 m-4 overflow-hidden rounded-2xl">
+    <div className="relative w-full max-w-3/4 h-96 m-4 overflow-hidden rounded-2xl">
       {/* Carousel Images */}
       <div className="flex transition-transform duration-3000 h-full" style={{ transform: `translateX(-${currentIndex * (100 / images.length)}%)`, width: `${images.length * 100}%` }}>
         {images.map((image, index) => (
