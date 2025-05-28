@@ -41,21 +41,22 @@ export default function Home() {
 
       <br className="bg-gray-100" />
 
-      <div className="flex w-full items-center justify-center-safe p-3 bg-gray-100 text-black">
-        <div className="flex max-w-1/3 text-center gap-4 justify-center">
+      <div className="flex w-full  items-center justify-center-safe p-3 bg-gray-100 text-black">
+
+        <div className="grid md:grid-cols-2 xl:flex  text-center gap-4 xl:justify-center">
           {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
-          <div className="">
+          <div className="grid justify-center w-100">
             <div>
               <h2 className={`${merriweather.className}`}>Título noticia</h2>
             </div>
             <div className="w-100 ">
-              <Image
+              <img
                 src={"/imgs/imgsteste/auditorio.jpg"}
                 alt={"Foto noticia"}
-                className="w-[200px] h-[200px] object-cover shadow-black shadow-md"
+                className=" object-cover shadow-black shadow-md"
                 quality={100}
                 layout="responsive"
-                width={200}
+                width={500}
                 height={200}
               />
             </div>
@@ -70,18 +71,18 @@ export default function Home() {
           {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
 
 
-          <div className="">
+          <div className="grid justify-center w-100">
             <div>
               <h2 className={`${merriweather.className}`}>Título noticia</h2>
             </div>
             <div className="w-100"> 
-              <Image
+              <img
                 src={"/imgs/imgsteste/biblioteca.jpg"}
                 alt={"Foto noticia"}
-                className="w-[200px] h-[200px] object-cover shadow-black shadow-md"
+                className="object-cover shadow-black shadow-md"
                 quality={100}
                 layout="responsive"
-                width={200}
+                width={500}
                 height={200}
               />
             </div>
@@ -93,19 +94,19 @@ export default function Home() {
             </div>
           </div>
           {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
-          <div>
+          <div className="grid justify-center w-100">
             <div>
               <h2 className={`${merriweather.className}`}>Título noticia</h2>
             </div>
             <div className="w-100">
-              <Image
+              <img
                 src={"/imgs/imgsteste/futsal.jpeg"}
                 alt={"Foto noticia"}
-                className="w-[200px] h-[200px] object-cover shadow-black shadow-md"
+                className="h-[280px] object-cover shadow-black shadow-md"
                 quality={100}
                 layout="responsive"
-                width={200}
-                height={200}
+                width={500}
+                
               />
             </div>
             <div className={`${roboto.className}`}>
