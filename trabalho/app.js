@@ -1,6 +1,6 @@
 import express from 'express';
 const app = express();
-const port = 3000;
+const port = 3001;
 import cors from 'cors';
 
 
@@ -27,9 +27,9 @@ app.use((req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${3000}`);
+    console.log(`Servidor rodando em http://localhost:${3001}`);
 
-    
+
 
 
 

@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
   
   return (
     <html lang="pt-br">
-      <body className={`${roboto.className} ${merriweather.className} ${playfairDisplay.className}`}>
+      <body className={`${roboto.className} ${merriweather.className} ${playfairDisplay.className} bg-gray-100`}>
         {showLayout && <Header />}
         {children}
         {showLayout && <Footer />}
