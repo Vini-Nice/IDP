@@ -1,34 +1,22 @@
 'use client';
 
-
- // Importações 
-
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/navigation'; 
-import './login.css';
-
-
-// UseStates e confirmação de senha
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [csenha, setCsenha] = useState('');
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-    if(senha !== csenha) {
-      alert('As senhas não coincidem.')
-        return;
+    if (senha !== csenha) {
+      alert('As senhas não coincidem.');
+      return;
     }
-    
-  
-
-    
 
     try {
       const resposta = await axios.post('http://localhost:3001/login', {
@@ -36,126 +24,130 @@ export default function LoginPage() {
         senha,
       });
 
-      // Exibindo mensagens como alert
-
       alert(resposta.data.mensagem);
-
 
       localStorage.setItem('usuarioAutenticado', JSON.stringify({
         email: resposta.data.email
       }));
 
+      const emailUsuario = resposta.data.email || email;
 
-   // Ir para a página Home (se for aluno)
-   // Adimistarativa (se for da gestão) 
-   //e de criação de notícias (se for do grêmio ou professor)
-     
-   const emailUsuario = resposta.data.email || email;
+      if (emailUsuario.endsWith('@aluno.com')) {
+        router.push('/');
+      } else if (emailUsuario.endsWith('@gestao.com')) {
+        router.push('/');
+      } else if (
+        emailUsuario.endsWith('@gremio.com') ||
+        emailUsuario.endsWith('@professor.com')
+      ) {
+        router.push('/');
+      } else {
+        alert('Você não pode ter acesso a esse site infelizmente, só pessoas que estudam ou trabalham no Colégio.');
+      }
 
-   if (emailUsuario.endsWith('@aluno.com')) {
-     router.push('/');
-   } else if (emailUsuario.endsWith('@gestao.com')) {
-     router.push('/');
-   } else if (
-     emailUsuario.endsWith('@gremio.com') ||
-     emailUsuario.endsWith('@professor.com')
-   ) {
-     router.push('/');
-   } else {
-     alert('Você não pode ter acesso a esse site infelizmente, só pessoas que estudam ou trabalham no Colégio.');
-   }
+    } catch (erro) {
+      if (erro.response) {
+        alert(erro.response.data.mensagem);
+      } else {
+        alert('Erro ao fazer login.');
+      }
+    }
+  };
 
- } catch (erro) {
-   if (erro.response) {
-     alert(erro.response.data.mensagem);
-   } else {
-     alert('Erro ao fazer login.');
-   }
- }
-};
+  return (
 
-
-
- // Títulos, textos e formulários
-
-  return <div>
+    <div className="relative min-h-screen">
+     <div 
+     className="absolute inset-0 bg-cover bg-center opacity-40 bg-no-repeat z-0"
+style={{backgroundImage: "url('/geral.imgs/fundo.png')",
+    
+}}
+    ></div>
 
 
-<div className="l2">
-      <div className="final-container" >
-        <br></br>
-        <h1 className="titulol">Sua melhor experiência escolar.</h1>
+
+    <div className="relative z-0 min-h-screen from-blue-100 to-white flex items-center justify-center p-4">
+      <div className="mt-60 w-full max-w-md bg-white rounded-2xl shadow-xl p-6">
+        <h1 className="text-2xl font-bold text-center text-blue-700">Sua melhor experiência escolar.</h1>
+        <hr className="my-4 border-t-2 border-blue-300" />
         
-        <hr className="linha-divisoria" />
+        <h2 className="text-lg text-center text-gray-700 mb-4">
+          Faça seu login para entrar e explorar as novidades do <br />
+          Colégio técnico Instituto Dom Pedro II
+        </h2>
 
-        <br></br>
-         
-         <h2 className='texto1'>Faça seu login para entrar 
-e explorar as novidades do  Colégio técnico 
-Instituto Dom Pedro II </h2>
+        <h2 className="text-md text-center text-gray-600 mb-6">
+          Se mantenha informado da melhor forma possível
+        </h2>
 
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Seu email:
+            </label>
+            <input
+              type="email"
+              className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-<div>
-<h2 className='texto2'>Se mantenha infomado da<br></br> melhor forma possível</h2>
-</div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Sua senha:
+            </label>
+            <input
+              type="password"
+              className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+            />
+          </div>
 
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Confirme sua senha:
+            </label>
+            <input
+              type="password"
+              className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700"
+              value={csenha}
+              onChange={(e) => setCsenha(e.target.value)}
+              required
+            />
+          </div>
 
-<div className='form'>
-
-        <form className="form-login" onSubmit={handleSubmit}>
-
-
-          <label><br></br>
-            <i>Seu email:<br></br></i>
-            <input className='input' type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          </label>
-
-
-            <br></br><br></br>
-          <label>
-            <i>Sua senha: <br></br></i>
-            <input className='input' type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
-          </label>
-          <br></br><br></br>
-
-
-          <label>
-            <i>Confirme sua senha: <br></br></i>
-            <input className='input' type="password" value={csenha} onChange={(e) => setCsenha(e.target.value)} required />
-          </label>
-
-
-
-         <br></br><br></br>
-          <button className='botao1' type="submit">Entrar</button>
-          <br></br><br></br><br></br>
-
-          <a className='cadastro' onClick={() => router.push('/cadastro')}>
-    Não tem conta? Cadastre-se!
-    </a>  
-
-<br></br><br></br>
-
-    <a className='esqsenha' onClick={() => router.push('/esquecisenha')}>
-      Esqueci minha senha
-    </a>  
-
-   
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
+          >
+            Entrar
+          </button>
         </form>
-</div>
-<br></br><br></br>
-       
-</div>
-  </div>
 
+        <div className="mt-6 flex flex-col items-center space-y-2 text-sm">
+          <button
+            onClick={() => router.push('/cadastro')}
+            className="text-blue-600 hover:underline"
+          >
+            Não tem conta? Cadastre-se!
+          </button>
 
-
-
-
-
-  </div>;
+          <button
+            onClick={() => router.push('/esquecisenha')}
+            className="text-blue-600 hover:underline"
+          >
+            Esqueci minha senha
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+  );
 }
-
 
 
 

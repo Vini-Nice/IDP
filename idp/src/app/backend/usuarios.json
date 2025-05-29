@@ -33,5 +33,10 @@
     "cpf": "456456789080",
     "email": "teste@aluno.com",
     "senha": "55"
+  },
+  {
+    "cpf": "34556778990",
+    "email": "teste@gestao.com",
+    "senha": "444"
   }
 ]
