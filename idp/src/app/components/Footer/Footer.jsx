@@ -5,7 +5,7 @@ export default function Footer() {
         <>
         <footer className="    bg-blue-600 w-full flex justify-center  border-t-2 border-t-white border-b-2 "> 
 
-            <div className="grid justify-center  md:flex md:justify-start relative p-4 gap-6 "> {/* div pai*/}
+            <div className="grid sm:text-sm justify-center  md:grid-cols-4 md:text-sm  md:justify-start xl:flex relative p-4 gap-6 "> {/* div pai*/}
 
                 <div className="w-[100px] m-4 me-8"> {/* div da logo*/}
                     <img src="/imgs/imgsteste/ch1.jpg" alt="" />
