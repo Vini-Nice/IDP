@@ -158,8 +158,8 @@ INSERT INTO Noticias (titulo, descricao, data, imagem, usuario, categoria) VALUE
     'Sustentabilidade'
 );
 (
-    'Feira de Empregos Abre Mil Vagas em Diversas Áreas',
-    'O evento ocorrerá no centro de convenções e terá entrada gratuita.',
+    'Parceria com universidade garante curso gratuito de programação',
+    'Uma porta valiosa para o futuro digital foi aberta para os alunos do Ensino Médio do Instituto Dom Pedro II! Graças a uma inovadora parceria com a renomada Universidade Federal, os estudantes terão acesso a um curso gratuito e exclusivo de programação e lógica computacional. Essa colaboração estratégica visa capacitar os jovens em uma das áreas mais dinâmicas e promissoras do mercado de trabalho, preparando-os para as exigências do século XXI. As aulas serão ministradas por professores universitários experientes e acontecerão nas instalações do próprio IDP, facilitando o acesso e a integração dos alunos.\n\nO curso abordará desde os fundamentos da lógica de programação até a criação de algoritmos e a introdução a diferentes linguagens. "É uma oportunidade incrível para nossos alunos. O conhecimento em programação é cada vez mais essencial, independentemente da área que eles escolham seguir", afirmou a coordenadora do Ensino Médio, Professora Helena Castro. A expectativa é que o curso não apenas desenvolva novas habilidades nos alunos, mas também inspire alguns a seguir carreiras em tecnologia e inovação. Essa parceria reforça o compromisso do IDP em oferecer uma educação de ponta, conectada às demandas do mundo contemporâneo e que prepare seus alunos para um futuro de sucesso.',
     '2025-05-15',
     LOAD_FILE('../../../public/noticias.imgs/not10.png'),
     10,

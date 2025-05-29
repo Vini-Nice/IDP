@@ -1,4 +1,63 @@
+'use client'
+
+import { useEffect } from "react";
+
 export default function Criar() {
+    useEffect(() => {
+        const form = document.getElementById("noticiaForm");
+
+        if(form) {
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault();
+                
+                const titulo = form.titulo.value;
+                const conteudo = form.conteudo.value;
+
+    //          const form = document.getElementById('noticiaForm');
+    //          const formData = new FormData(form);
+
+                const response = await fetch("/api/noticias", {
+                    method: 'POST',
+                headers: {
+                    'Authorization': 'SEGREDO' // Substitua pelo seu token JWT
+                },
+                body: formData
+                });
+                const data = await response.json();
+                document.getElementById('responseContent').textContent = JSON.stringify(data, null, 2);
+            });
+        }
+
+        return () => {
+            if(form) {
+                form.removeEventListener("submit", () => {});
+            }
+        };
+    }, []);
+    
+    // document.getElementById('noticiaForm').addEventListener('submit', async function(event) {
+    //     event.preventDefault();
+
+    //     const form = document.getElementById('noticiaForm');
+    //     const formData = new FormData(form);
+
+    //     try {
+    //         const response = await fetch('http://localhost:3000/noticias', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Authorization': 'SEGREDO' // Substitua pelo seu token JWT
+    //             },
+    //             body: formData
+    //         });
+
+    //         const data = await response.json();
+    //         document.getElementById('responseContent').textContent = JSON.stringify(data, null, 2);
+    //     } catch (error) {
+    //         console.error('Erro:', error);
+    //         document.getElementById('responseContent').textContent = 'Erro ao enviar os dados.';
+    //     }
+    // });
+    
     return (
         <>
   <h1>Adicionar Nova Noticia</h1>
@@ -24,28 +83,3 @@ export default function Criar() {
 </>
     )
 }
-
-document.getElementById('noticiaForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
-
-    const form = document.getElementById('noticiaForm');
-    const formData = new FormData(form);
-
-    console.log(formData.value)
-
-    try {
-        const response = await fetch('http://localhost:3000/noticias', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'SEGREDO' // Substitua pelo seu token JWT
-            },
-            body: formData
-        });
-
-        const data = await response.json();
-        document.getElementById('responseContent').textContent = JSON.stringify(data, null, 2);
-    } catch (error) {
-        console.error('Erro:', error);
-        document.getElementById('responseContent').textContent = 'Erro ao enviar os dados.';
-    }
-});
