@@ -49,7 +49,8 @@ A coordenadora pedagógica **Profa. Mariana Souza** sugeriu a criação de um po
 
 No bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/idp-news.git
+
+https://github.com/Vini-Nice/IDP.git
 
 # Acesse a pasta
 cd idp-news
