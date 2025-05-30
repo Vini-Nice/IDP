@@ -22,7 +22,7 @@ const playfairDisplay = Playfair_Display({
 
 const AnnouncementCard = ({ date, title, description }) => {
   return (
-    <div className="bg-stone-100 shadow-md rounded-lg p-4 mb-4 ">
+    <div className="bg-stone-100 shadow-md rounded-lg p-4 mb-4 hover:scale-108 transition-transform duration-300 ease-in-out">
       <p className="text-sm text-gray-500">{date}</p>
       <h3 className={`${merriweather.className} text-lg font-semibold text-blue-600 mb-2 `}>{title}</h3>
       <p className={`${roboto.className} text-gray-700 text-sm`}>{description}</p>

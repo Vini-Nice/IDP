@@ -41,83 +41,71 @@ export default function Home() {
 
       <br className="bg-gray-100" />
 
-      <div className="flex w-full  items-center justify-center-safe p-3 bg-gray-100 text-black">
-
-        <div className="grid md:grid-cols-2 xl:flex  text-center gap-4 xl:justify-center">
-          {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
-          <div className="grid justify-center w-100">
-            <div>
-              <h2 className={`${merriweather.className}`}>Título noticia</h2>
-            </div>
-            <div className="w-100 ">
-              <img
-                src={"/imgs/imgsteste/auditorio.jpg"}
-                alt={"Foto noticia"}
-                className=" object-cover shadow-black shadow-md"
-                quality={100}
-                layout="responsive"
-                width={500}
-                height={200}
-              />
-            </div>
-            <div className={`${roboto.className}`}>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod
-              quis minus soluta tempore ab eligendi molestiae, excepturi, eius
-              alias ipsa voluptatibus natus voluptate quibusdam possimus
-              reprehenderit. Assumenda, totam. Sit, laboriosam?
-            </div>
-          </div>
-
-          {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
-
-
-          <div className="grid justify-center w-100">
-            <div>
-              <h2 className={`${merriweather.className}`}>Título noticia</h2>
-            </div>
-            <div className="w-100"> 
-              <img
-                src={"/imgs/imgsteste/biblioteca.jpg"}
-                alt={"Foto noticia"}
-                className="object-cover shadow-black shadow-md"
-                quality={100}
-                layout="responsive"
-                width={500}
-                height={200}
-              />
-            </div>
-            <div className={`${roboto.className}`}>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod
-              quis minus soluta tempore ab eligendi molestiae, excepturi, eius
-              alias ipsa voluptatibus natus voluptate quibusdam possimus
-              reprehenderit. Assumenda, totam. Sit, laboriosam?
-            </div>
-          </div>
-          {/* ----------------------- SEÇÃO PARA CARDS COM ALGUMAS NOTÍCIAS --------------------------------------------*/}
-          <div className="grid justify-center w-100">
-            <div>
-              <h2 className={`${merriweather.className}`}>Título noticia</h2>
-            </div>
-            <div className="w-100">
-              <img
-                src={"/imgs/imgsteste/futsal.jpeg"}
-                alt={"Foto noticia"}
-                className="h-[280px] object-cover shadow-black shadow-md"
-                quality={100}
-                layout="responsive"
-                width={500}
-                
-              />
-            </div>
-            <div className={`${roboto.className}`}>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod
-              quis minus soluta tempore ab eligendi molestiae, excepturi, eius
-              alias ipsa voluptatibus natus voluptate quibusdam possimus
-              reprehenderit. Assumenda, totam. Sit, laboriosam?
-            </div>
-          </div>
-        </div>
+      <div className="flex w-full items-center justify-center p-3 bg-gray-100 text-black">
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full max-w-6xl">
+    {/* ----------------------- CARD 1 --------------------------------------------*/}
+    <div className="flex flex-col items-center p-4 hover:scale-115 transition-transform duration-300 ease-in-out">
+      <h2 className={`${merriweather.className} text-lg font-bold mb-2`}>
+        Título notícia
+      </h2>
+      <div className="w-full aspect-video overflow-hidden rounded-sm border">
+        <img
+          src={"/imgs/imgsteste/auditorio.jpg"}
+          alt={"Foto noticia"}
+          className="w-full h-full object-cover"
+        />
       </div>
+      <p className={`${roboto.className} text-sm mt-4 text-justify`}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod quis
+        minus soluta tempore ab eligendi molestiae, excepturi, eius alias ipsa
+        voluptatibus natus voluptate quibusdam possimus reprehenderit.
+        Assumenda, totam. Sit, laboriosam?
+      </p>
+    </div>
+
+    {/* ----------------------- CARD 2 --------------------------------------------*/}
+    <div className="flex flex-col items-center p-4 hover:scale-115 transition-transform duration-300 ease-in-out">
+      <h2 className={`${merriweather.className} text-lg font-bold mb-2`}>
+        Título notícia
+      </h2>
+      <div className="w-full aspect-video overflow-hidden rounded-sm border">
+        <img
+          src={"/imgs/imgsteste/biblioteca.jpg"}
+          alt={"Foto noticia"}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <p className={`${roboto.className} text-sm mt-4 text-justify`}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod quis
+        minus soluta tempore ab eligendi molestiae, excepturi, eius alias ipsa
+        voluptatibus natus voluptate quibusdam possimus reprehenderit.
+        Assumenda, totam. Sit, laboriosam?
+      </p>
+    </div>
+
+    {/* ----------------------- CARD 3 --------------------------------------------*/}
+    <div className="flex flex-col items-center p-4 hover:scale-115 transition-transform duration-300 ease-in-out">
+      <h2 className={`${merriweather.className} text-lg font-bold mb-2`}>
+        Título notícia
+      </h2>
+      <div className="w-full aspect-video overflow-hidden rounded-sm border">
+        <img
+          src={"/imgs/imgsteste/futsal.jpeg"}
+          alt={"Foto noticia"}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <p className={`${roboto.className} text-sm mt-4 text-justify`}>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod quis
+        minus soluta tempore ab eligendi molestiae, excepturi, eius alias ipsa
+        voluptatibus natus voluptate quibusdam possimus reprehenderit.
+        Assumenda, totam. Sit, laboriosam?
+      </p>
+    </div>
+  </div>
+</div>
+
+
     </>
   );
 }
