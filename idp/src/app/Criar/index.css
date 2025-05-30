@@ -6,6 +6,7 @@ form {
     flex-direction: column;
     max-width: 400px;
     margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.534);
 }
 label {
     margin-top: 10px;

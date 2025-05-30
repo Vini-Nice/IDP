@@ -146,9 +146,10 @@ export default function Atualizar() {
     // })
     return (
 <>
-  <h1>Editar Noticia</h1>
+  
   <form id="noticiaForm" onSubmit={handleSubmit} className="form">
-    <label htmlFor="id_noticias">ID da Noticia:</label >
+  <h1>Editar Noticia</h1>
+    <label htmlFor="id_noticias"></label >
     <input type="hidden" name="id_noticias" value={formData.id_noticias} onChange={handleChange}/>
     <label htmlFor="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" required="" value={formData.titulo} onChange={handleChange} />

@@ -1,4 +1,5 @@
 'use client'
+import './index.css'
 
 import { useEffect } from "react";
 
