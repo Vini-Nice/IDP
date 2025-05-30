@@ -66,6 +66,11 @@ export default function Atualizar() {
             },
             body: formDataToSend
           });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Erro ${response.status}: ${errorText}`);
+          } 
       
           const result = await response.json();
           setResponseContent(JSON.stringify(result, null, 2));
@@ -141,18 +146,19 @@ export default function Atualizar() {
     // })
     return (
 <>
+  
+  <form id="noticiaForm" onSubmit={handleSubmit} className="form">
   <h1>Editar Noticia</h1>
-  <form id="noticiaForm" onSubmit={handleSubmit}>
-    <label htmlFor="id_noticias">ID da Noticia:</label>
-    <input type="number" id="id_noticias" name="id_noticias" required="" placeholder="Digite o ID da noticia que você deseja editar." />
+    <label htmlFor="id_noticias"></label >
+    <input type="hidden" name="id_noticias" value={formData.id_noticias} onChange={handleChange}/>
     <label htmlFor="titulo">Título:</label>
-    <input type="text" id="titulo" name="titulo" required="" value={formData.id_noticias} onChange={handleChange} />
+    <input type="text" id="titulo" name="titulo" required="" value={formData.titulo} onChange={handleChange} />
     <label htmlFor="descricao">Descrição:</label>
-    <input type="text" id="descricao" name="descricao" required="" value={formData.titulo} onChange={handleChange} />
+    <input type="text" id="descricao" name="descricao" required="" value={formData.descricao} onChange={handleChange} />
     <label htmlFor="data">Data da Postagem:</label>
-    <input type="date" id="data" name="data" required="" value={formData.descricao} onChange={handleChange} />
+    <input type="date" id="data" name="data" required="" value={formData.data} onChange={handleChange} />
     <label htmlFor="imagem">Imagem da Postagem:</label>
-    <input type="file" id="imagem" name="imagem" accept="image/*" required="" value={formData.imagem} onChange={handleChange} />
+    <input type="file" id="imagem" name="imagem" accept="image/*" onChange={handleChange} />
     <label htmlFor="usuario">ID do Usuário:</label>
     <input type="text" id="usuario" name="usuario" required="" value={formData.usuario} onChange={handleChange} />
     <label htmlFor="categoria">Categoria da Noticia:</label>
@@ -161,7 +167,7 @@ export default function Atualizar() {
   </form>
   <div id="response">
     Resposta do Servidor:
-    <pre id="responseContent" />
+    <pre>{responseContent}</pre>
   </div>
 </>
 
