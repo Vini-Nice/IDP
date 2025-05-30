@@ -1,5 +1,6 @@
 'use client'
 
+
 import { useEffect } from "react";
 
 export default function Criar() {
@@ -60,25 +61,54 @@ export default function Criar() {
     
     return (
         <>
-  <h1>Adicionar Nova Noticia</h1>
-  <form id="noticiaForm">
-    <label htmlFor="titulo">Título:</label>
-    <input type="text" id="titulo" name="titulo" required="" />
-    <label htmlFor="descricao">Descrição:</label>
-    <input type="text" id="descricao" name="descricao" required="" />
-    <label htmlFor="data">Data da Postagem:</label>
-    <input type="date" id="data" name="data" required="" />
-    <label htmlFor="imagem">Imagem da Postagem:</label>
-    <input type="file" id="imagem" name="imagem" accept="image/*" required="" />
-    <label htmlFor="usuario">ID do Usuário:</label>
-    <input type="text" id="usuario" name="usuario" required="" />
-    <label htmlFor="categoria">Categoria da Noticia:</label>
-    <input type="text" id="categoria" name="categoria" required="" />
-    <button type="submit">Adicionar Noticia</button>
+        
+  <div className="bg-black min-h-screen py-10">
+<div className="max-w-2x1 mx-auto p-6 shadow-lg rouded-2x1">
+<h1 className="text-2x4 font-bold mb-6 text-white-800 text-center">Adicionar Nova Noticia</h1>
+
+  <form id="noticiaForm" className="space-y-4">
+
+    <div>
+    <label className="block text-sm font-medium text-white-700" htmlFor="titulo">Título:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="titulo" name="titulo" required="" />
+    </div>
+
+    <div>
+    <label className="block text-sm font-medium text-white-700" htmlFor="descricao">Descrição:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="descricao" name="descricao" required="" />
+    </div>
+
+     <div>
+    <label className="block text-sm font-medium text-white-700" htmlFor="data">Data da Postagem:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="date" id="data" name="data" required="" />
+    </div>
+
+     <div>
+    <label className="block text-sm font-medium text-white-700" htmlFor="imagem">Imagem da Postagem:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="file" id="imagem" name="imagem" accept="image/*" required="" />
+    </div>
+
+     <div>
+    <label className="block text-sm font-sm font-medium text-white-700" htmlFor="usuario">ID do Usuário:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="usuario" name="usuario" required="" />
+     </div>
+
+     <div>
+    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="categoria">Categoria da Noticia:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="categoria" name="categoria" required="" />
+     </div>
+
+
+    <button 
+    className="w-100 bg-red-900 text-gray py-2 px-4 rouded-lg hover:bg-blue-900 transition duration-300"
+    type="submit">Adicionar Noticia</button>
   </form>
-  <div id="response">
-    Resposta do Servidor:
-    <pre id="responseContent" />
+
+  <div id="response" className="mt-6">
+    <h2 className="text-sm text-gray-600 font-semibold">Resposta do Servidor:</h2>
+    <pre id="responseContent" className="bg-gray-400 p-4 rouded-lg mt-2 text-sm text-gray-900" />
+  </div>
+  </div>
   </div>
 </>
     )
