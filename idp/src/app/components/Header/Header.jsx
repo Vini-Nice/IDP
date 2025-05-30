@@ -29,7 +29,7 @@ export default function Header() {
                         <ul className="flex gap-8">
                             <li><a href="">Notícias</a></li>
                             <li><a href="../avisos">Avisos</a></li>
-                            <li><a href="">Eventos</a></li>
+                            <li><a href="../eventos">Eventos</a></li>
                         </ul>
                     </div>
                     {/* <img src="" alt="" /> */}
