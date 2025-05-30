@@ -8,12 +8,12 @@ export default function Footer() {
             <div className="grid sm:text-sm justify-center  md:grid-cols-4 md:text-sm  md:justify-start xl:flex relative p-4 gap-6 "> {/* div pai*/}
 
                 <div className="w-[100px] m-4 me-8"> {/* div da logo*/}
-                    <img src="/imgs/imgsteste/ch1.jpg" alt="" />
+                    <img src="/geral.imgs/logo2.png" alt="" />
                 </div>
 
                 <div className="m-auto "> {/* div das informações, tipo a história e localização*/}
                     <h2 className="capitalize font-bold">Colégio Instituto Dom Pedro II</h2>
-                    <p>Localização- rua sei lá aonde blablabla</p>
+                    <p>Localização- Av. 203, Unid 203, Rua 13, 57, São Luís - MA, 65058-009</p>
                     <p className="border-b-1">Horário de atendimento - 7 horas às 17 horas</p>
                     <h4 className="font-bold">MAIS</h4>
                     <p>Nossa História</p>
@@ -25,7 +25,7 @@ export default function Footer() {
                 <div className=""> {/* div dos conteúdos*/}
                     <h2 className="capitalize font-bold">Conteúdos sla</h2> <br />
                     <p>Educação</p>
-                    <p>Eventos Escolares</p>
+                    <p> <a href="../eventos">Eventos Escolares</a></p>
                     <p>Esportes e Cultura</p>
                     <p>Projetos e Iniciativas</p>
                     <p>Comunicados Oficiais</p>
@@ -41,14 +41,14 @@ export default function Footer() {
 
                 <div>
                     <h2 className="font-bold">Contato</h2> <br />
-                    <p>Email: tralala@gmail.com</p>
-                    <p>Telefone: 8922-4002</p>
-                    <p>WhatsApp: (11) 98754-2345</p> 
+                    <p className="hover:underline hover:cursor-pointer">Email:  contato@institutodompedroii.edu.br</p>
+                    <p className="hover:underline hover:cursor-pointer">Telefone: 8922-4002</p>
+                    <p className="hover:underline hover:cursor-pointer">WhatsApp: (11) 98754-2345</p> 
                 </div>
 
                 <div>
                     <h2 className="font-bold">Informações Extras</h2> <br />
-                    <p>Avisos Importantes</p>
+                    <p> <a href="../avisos">Avisos Importantes</a></p>
                     <p>Biblioteca Online</p>
                     <p>Arquivos de Notícias</p>
                     <p>Galeria de Fotos e Vídeos</p>

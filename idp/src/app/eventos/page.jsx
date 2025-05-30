@@ -30,7 +30,7 @@ const eventos = [
 export default function Eventos() {
     return (
         <div className={`min-h-screen bg-white ${roboto.className}`}>
-            {/* Header Responsivo */}
+            {/* Informação da página */}
             <div className="bg-blue-600 text-white py-8 sm:py-12 px-4">
                 <div className="max-w-6xl mx-auto">
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 text-center sm:text-left">
@@ -42,7 +42,7 @@ export default function Eventos() {
                 </div>
             </div>
 
-            {/* Content com melhor responsividade */}
+            {/* Eventos */}
             <div className="max-w-6xl mx-auto py-8 sm:py-12 px-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                     {eventos.map((evento, index) => (

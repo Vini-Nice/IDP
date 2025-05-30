@@ -24,8 +24,14 @@ const AnnouncementCard = ({ date, title, description }) => {
   return (
     <div className="bg-stone-100 shadow-md rounded-lg p-4 mb-4 hover:scale-108 transition-transform duration-300 ease-in-out">
       <p className="text-sm text-gray-500">{date}</p>
-      <h3 className={`${merriweather.className} text-lg font-semibold text-blue-600 mb-2 `}>{title}</h3>
-      <p className={`${roboto.className} text-gray-700 text-sm`}>{description}</p>
+      <h3
+        className={`${merriweather.className} text-lg font-semibold text-blue-600 mb-2 `}
+      >
+        {title}
+      </h3>
+      <p className={`${roboto.className} text-gray-700 text-sm`}>
+        {description}
+      </p>
     </div>
   );
 };
@@ -64,6 +70,18 @@ const Announcements = () => {
 
   return (
     <div className="bg-white">
+      
+      <div className="bg-blue-600 text-white py-8 sm:py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 text-center sm:text-left">
+            Avisos
+          </h1>
+          <p className="text-blue-100 text-center sm:text-left text-sm sm:text-base">
+            Confira o quadro de Avisos
+          </p>
+        </div>
+      </div>
+
       <div className="max-w-5xl mx-auto py-8">
         {announcements.map((announcement, index) => (
           <AnnouncementCard
