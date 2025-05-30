@@ -1,8 +1,14 @@
 'use client';
 
+
+// Importaçãoes 
+
 import axios from "axios";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+
+
+// Funcionalidade (Verificação se email é institucional e confirmação/redefinição de senha) 
 
 export default function EsqueciSenha() {
   const [email, setEmail] = useState("");
@@ -33,11 +39,14 @@ export default function EsqueciSenha() {
       });
 
       alert(resposta.data.mensagem || "Senha atualizada com sucesso!");
-      router.push("/");
+      router.push("/Login");
     } catch (err) {
       alert(err.response?.data?.mensagem || "Erro ao redefinir a senha.");
     }
   };
+
+
+  // Formulário
 
   return (
 
