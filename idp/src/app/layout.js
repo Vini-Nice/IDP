@@ -29,9 +29,9 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
 
   const showLayout = !(
-    pathname.startsWith('/login') ||
-    pathname.startsWith('/cadastro') ||
-    pathname.startsWith('/esquecisenha')
+    pathname.startsWith('/Login') ||
+    pathname.startsWith('/Cadastro') ||
+    pathname.startsWith('/Esquecisenha')
   );
   
   return (

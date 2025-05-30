@@ -1,8 +1,13 @@
 'use client';
 
+// Importações
+
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+
+
+// Funcionalidade (Confirmação de senha, Validação de email institucional)
 
 export default function Cadastro() {
   const [cpf, setCpf] = useState('');
@@ -26,11 +31,14 @@ export default function Cadastro() {
         senha,
       });
       alert(res.data.mensagem);
-      router.push('./login');
+      router.push('./Login');
     } catch (err) {
       alert(err.response?.data?.erro || 'Erro no cadastro');
     }
   };
+
+
+  // Formulário
 
   return (
 

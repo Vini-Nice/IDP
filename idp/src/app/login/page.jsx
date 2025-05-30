@@ -1,8 +1,12 @@
 'use client';
 
+// Importações 
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+
+// Funcionalidade (Confirmação de senha, Verificação email institucional, entre outros)
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -53,6 +57,9 @@ export default function LoginPage() {
       }
     }
   };
+
+
+  // Formulário
 
   return (
 
@@ -130,14 +137,14 @@ style={{backgroundImage: "url('/geral.imgs/fundo.png')",
 
         <div className="mt-6 flex flex-col items-center space-y-2 text-sm">
           <button
-            onClick={() => router.push('/cadastro')}
+            onClick={() => router.push('/Cadastro')}
             className="text-blue-600 hover:underline"
           >
             Não tem conta? Cadastre-se!
           </button>
 
           <button
-            onClick={() => router.push('/esquecisenha')}
+            onClick={() => router.push('/Esquecisenha')}
             className="text-blue-600 hover:underline"
           >
             Esqueci minha senha

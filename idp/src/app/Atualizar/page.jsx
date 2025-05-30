@@ -66,6 +66,11 @@ export default function Atualizar() {
             },
             body: formDataToSend
           });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Erro ${response.status}: ${errorText}`);
+          } 
       
           const result = await response.json();
           setResponseContent(JSON.stringify(result, null, 2));
@@ -76,7 +81,9 @@ export default function Atualizar() {
       };
 
     if(!noticiaId) {
-        return <p style={{ color: 'red' }}>ID da notícia não especificado na URL. Use: ?id_noticias=SEU_ID</p>;
+        return   <div className="bg-black min-h-screen py-100">
+          <div className="max-w-2x1 mx-auto p-40 shadow-lg rouded-2x1">
+          <h1 className="text-2x1 font-bold mb-10 text-red-800 text-center" style={{ color: 'red' }}>ID da notícia não especificado na URL. Use: ?id_noticias=SEU_ID</h1></div></div>;
     }
     
     // useEffect(() => {
@@ -141,27 +148,62 @@ export default function Atualizar() {
     // })
     return (
 <>
-  <h1>Editar Noticia</h1>
-  <form id="noticiaForm" onSubmit={handleSubmit}>
-    <label htmlFor="id_noticias">ID da Noticia:</label>
-    <input type="number" id="id_noticias" name="id_noticias" required="" placeholder="Digite o ID da noticia que você deseja editar." />
-    <label htmlFor="titulo">Título:</label>
-    <input type="text" id="titulo" name="titulo" required="" value={formData.id_noticias} onChange={handleChange} />
-    <label htmlFor="descricao">Descrição:</label>
-    <input type="text" id="descricao" name="descricao" required="" value={formData.titulo} onChange={handleChange} />
-    <label htmlFor="data">Data da Postagem:</label>
-    <input type="date" id="data" name="data" required="" value={formData.descricao} onChange={handleChange} />
-    <label htmlFor="imagem">Imagem da Postagem:</label>
-    <input type="file" id="imagem" name="imagem" accept="image/*" required="" value={formData.imagem} onChange={handleChange} />
-    <label htmlFor="usuario">ID do Usuário:</label>
-    <input type="text" id="usuario" name="usuario" required="" value={formData.usuario} onChange={handleChange} />
-    <label htmlFor="categoria">Categoria da Noticia:</label>
-    <input type="text" id="categoria" name="categoria" required="" value={formData.categoria} onChange={handleChange} />
-    <button type="submit">Atualizar Noticia.</button>
+  <div className="bg-black min-h-screen py-10">
+
+<div className="max-w-2x1 mx-auto p-6 shadow-lg rounded-2x1">
+  <h1 className="text-2x4 font-bold mb-6 text-white-800 text-center">Editar Noticia</h1>
+
+
+
+  <form id="noticiaForm" onSubmit={handleSubmit} className="space-y-4">
+
+  
+    <div>
+    <label htmlFor="id_noticias"></label >
+    <input type="hidden" name="id_noticias" value={formData.id_noticias} onChange={handleChange}/>
+    </div>
+
+
+    <div>
+    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="titulo">Título:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="titulo" name="titulo" required="" value={formData.titulo} onChange={handleChange} />
+    </div>
+
+    <div>
+    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="descricao">Descrição:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="descricao" name="descricao" required="" value={formData.descricao} onChange={handleChange} />
+    </div>
+
+    <div> 
+    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="data">Data da Postagem:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="date" id="data" name="data" required="" value={formData.data} onChange={handleChange} />
+    </div>
+
+
+    <div>
+    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="imagem">Imagem da Postagem:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="file" id="imagem" name="imagem" accept="image/*" onChange={handleChange} />
+    </div>
+
+    <div>
+    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="usuario">ID do Usuário:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="usuario" name="usuario" required="" value={formData.usuario} onChange={handleChange} />
+    </div>
+
+    <div >
+    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="categoria">Categoria da Noticia:</label>
+    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="categoria" name="categoria" required="" value={formData.categoria} onChange={handleChange} />
+    </div>
+
+    <button 
+    className="w-100 bg-red-900 text-gray py-2 px-4 rouded-lg hover:bg-blue-900 transition duration-300"
+    type="submit">Atualizar Noticia.</button>
   </form>
-  <div id="response">
+  <div id="response" className="mt-6">
     Resposta do Servidor:
-    <pre id="responseContent" />
+    <pre  className="bg-gray-400 p-4 rouded-lg mt-2 text-sm text-gray-900" >{responseContent}</pre>
+  </div>
+  </div>
   </div>
 </>
 

@@ -4,10 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function PegarId() {
-    const router = useRouter();
-    router.push(`/Atualizar?id_noticias=${id}`);
-
     const [id, setId] = useState('');
+    const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +20,7 @@ export default function PegarId() {
 
         <form id="id" onSubmit={handleSubmit}>
             <label htmlFor="id">ID da noticia:</label>
-            <input type="text" id="id" name="id" placeholder="Insira o ID da noticia" value={id} onChange={(e) => (e.target.value)}/>
+            <input type="text" id="id" name="id" placeholder="Insira o ID da noticia" value={id} onChange={(e) => setId(e.target.value)}/>
             <button type="submit">Enviar ID</button>
         </form>
         </>
