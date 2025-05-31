@@ -1,4 +1,5 @@
 import SocialMedia from "./socialmidia"
+import Link from 'next/link'
 
 export default function Footer() {
     return (
@@ -16,16 +17,15 @@ export default function Footer() {
                     <p>Localização- Av. 203, Unid 203, Rua 13, 57, São Luís - MA, 65058-009</p>
                     <p className="border-b-1">Horário de atendimento - 7 horas às 17 horas</p>
                     <h4 className="font-bold">MAIS</h4>
-                    <p>Nossa História</p>
-                    <p>Gestão</p>
-                    <p>Missão, visão e valores</p>
-                    
+                    <p><Link href="/sobre" className="hover:text-gray-200 transition-colors">Nossa História</Link></p>
+                    <p><Link href="/sobre" className="hover:text-gray-200 transition-colors">Gestão</Link></p>
+                    <p><Link href="/sobre" className="hover:text-gray-200 transition-colors">Missão, visão e valores</Link></p>
                 </div>
 
                 <div className=""> {/* div dos conteúdos*/}
-                    <h2 className="capitalize font-bold">Conteúdos sla</h2> <br />
+                    <h2 className="capitalize font-bold">Conteúdos</h2> <br />
                     <p>Educação</p>
-                    <p> <a href="../eventos">Eventos Escolares</a></p>
+                    <p><Link href="/eventos" className="hover:text-gray-200 transition-colors">Eventos Escolares</Link></p>
                     <p>Esportes e Cultura</p>
                     <p>Projetos e Iniciativas</p>
                     <p>Comunicados Oficiais</p>
@@ -33,7 +33,6 @@ export default function Footer() {
 
                 <div>
                     <h2 className="capitalize font-bold ">Links Úteis</h2> <br />
-                    
                     <p>Calendário Escolar</p>
                     <p>Horário das Aulas</p>
                     <p>Parcerias</p>
@@ -41,14 +40,14 @@ export default function Footer() {
 
                 <div>
                     <h2 className="font-bold">Contato</h2> <br />
-                    <p className="hover:underline hover:cursor-pointer">Email:  contato@institutodompedroii.edu.br</p>
+                    <p className="hover:underline hover:cursor-pointer">Email: contato@institutodompedroii.edu.br</p>
                     <p className="hover:underline hover:cursor-pointer">Telefone: 8922-4002</p>
                     <p className="hover:underline hover:cursor-pointer">WhatsApp: (11) 98754-2345</p> 
                 </div>
 
                 <div>
                     <h2 className="font-bold">Informações Extras</h2> <br />
-                    <p> <a href="../avisos">Avisos Importantes</a></p>
+                    <p><Link href="/avisos" className="hover:text-gray-200 transition-colors">Avisos Importantes</Link></p>
                     <p>Biblioteca Online</p>
                     <p>Arquivos de Notícias</p>
                     <p>Galeria de Fotos e Vídeos</p>
@@ -61,9 +60,6 @@ export default function Footer() {
 
             </div>
         </footer>
-
-
-
         </>
     )
 }
