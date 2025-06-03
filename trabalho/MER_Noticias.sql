@@ -7,7 +7,7 @@ CREATE TABLE Noticias (
 	titulo TEXT(65535) NOT NULL,
 	descricao TEXT(65535) NOT NULL,
 	data DATE NOT NULL,
-	imagem VARCHAR(255),
+	imagem BLOB,
 	usuario INT NOT NULL,
 	categoria VARCHAR(255) NOT NULL
 );
@@ -18,6 +18,21 @@ CREATE TABLE Usuarios (
 	email VARCHAR(255) NOT NULL,
 	senha INT NOT NULL,
 	cargo VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Avisos (
+id_Avisos INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+titulo VARCHAR(255) NOT NULL,
+descricao TEXT NOT NULL,
+data DATE NOT NULL
+);
+
+CREATE TABLE Eventos (
+id_Eventos INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+titulo TEXT NOT NULL,
+texto TEXT NOT NULL,
+imagem VARCHAR(255),
+data DATE NOT NULL
 );
 
 INSERT INTO Usuarios (nome, email, senha, cargo) 
@@ -165,6 +180,7 @@ INSERT INTO Noticias (titulo, descricao, data, imagem, usuario, categoria) VALUE
     10,
     'Economia'
 );
+
         
 SELECT nome, email
 FROM Usuarios
@@ -182,6 +198,9 @@ SELECT nome, email
 FROM Usuarios
 WHERE cargo = 'adm';
 
+SELECT DATE_FORMAT(data, '%d/%m/%Y') AS data
+FROM Noticias;
+
 ALTER TABLE Noticias MODIFY COLUMN imagem VARCHAR(255);
 
 UPDATE Noticias SET imagem = '/noticias.imgs/not1.png' WHERE id_noticias = 1;
@@ -194,3 +213,4 @@ UPDATE Noticias SET imagem = '/noticias.imgs/not7.jpg' WHERE id_noticias = 7;
 UPDATE Noticias SET imagem = '/noticias.imgs/not8.png' WHERE id_noticias = 8;
 UPDATE Noticias SET imagem = '/noticias.imgs/not9.png' WHERE id_noticias = 9;
 UPDATE Noticias SET imagem = '/noticias.imgs/not10.png' WHERE id_noticias = 10;
+

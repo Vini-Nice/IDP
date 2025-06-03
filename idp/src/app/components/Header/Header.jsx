@@ -49,13 +49,13 @@ export default function Header() {
                     {/* <img src="" alt="" /> */}
                     <ul className="flex gap-4">
                         <Link 
-                            href="/Login"
+                            href="/login"
                             className="bg-white hover:bg-gray-100 text-blue-600 font-bold py-2 px-4 rounded transition-colors"
                         >
                             Sign In
                         </Link>
                         <Link 
-                            href="/Cadastro"
+                            href="/cadastro"
                             className="bg-white hover:bg-gray-100 text-blue-600 font-bold py-2 px-4 rounded transition-colors"
                         >
                             Sign Up
