@@ -92,7 +92,13 @@ const Announcements = () => {
           />
         ))}
       </div>
+
+
+      
     </div>
+
+
+
   );
 };
 

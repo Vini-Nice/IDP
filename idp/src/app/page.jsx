@@ -6,6 +6,7 @@ import Link from "next/link";
 import Carousel from "./components/Carousel/Carousel";
 import { buscarNoticias } from "./services/noticiasService";
 import { Roboto, Merriweather, Playfair_Display } from 'next/font/google';
+import Accordion from "./components/Accordion/Accordion.js";
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -21,6 +22,31 @@ const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   weight: ['400', '700'],
 });
+
+// Perguntas frequentes e respostas 
+const faqItems = [
+  {
+    question: 'Todos podem criar, editar ou deletar notícias?',
+    answer: 'Os alunos só podem visualizar as notícias, já os professores, a gestão e o grêmio têm a possibilidade de criar também. Somente a gestão pode deletar e atualizar notícias.',
+  },
+  {
+    question: 'Como posso verificar meu email institucional?',
+    answer: 'Entre em contato conosco para receber seu email institucional, caso você trabalhe ou estude em nosso colégio técnico.',
+  },
+  {
+    question: 'De quanto em quanto tempo as notícias são atualizadas?',
+    answer: 'As notícias deste portal são atualizadas diariamente.',
+  },
+  {
+    question: 'Se eu não tenho email institucional, posso atualizar, criar ou deletar alguma notícia?',
+    answer: 'Não. Se você não possui email institucional, não pode criar, deletar ou atualizar notícias, apenas visualizar. Além disso, não poderá atualizar sua senha no portal. Caso esqueça a senha, entre em contato ou vá até o colégio.',
+  },
+];
+
+
+
+
+
 
 export default function Home() {
   const [noticias, setNoticias] = useState([]);
@@ -88,7 +114,9 @@ export default function Home() {
 
   return (
     <>
+
       {/* Carrossel */}
+
       <div className="h-full min-h-48 flex flex-col items-center justify-center p-2 bg-gray-100">
         <h2 className={`${merriweather.className} text-black italic font-bold mb-4`}>
           Principais notícias
@@ -105,51 +133,65 @@ export default function Home() {
 
       <br className="bg-gray-100" />
 
+
       {/* Grid de Notícias */}
-      <div className="flex w-full items-center justify-center p-3 bg-gray-100 text-black">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full max-w-6xl">
-          {noticias.map((noticia) => (
-            <Link 
-              href={`/noticias/${noticia.id_noticias}`}
-              key={noticia.id_noticias}
-              className="block"
+
+<div className="flex w-full items-center justify-center p-3 bg-gray-100 text-black">
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full max-w-6xl">
+    {noticias.map((noticia) => (
+      <Link 
+        href={`/noticias/${noticia.id_noticias}`}
+        key={noticia.id_noticias}
+        className="block"
+      >
+        <div className="flex flex-col bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-110 h-full">
+          <div className="relative">
+            <Image
+              src={getImageUrl(noticia)}
+              alt={noticia.titulo}
+              width={400}
+              height={300}
+              className="w-full h-48 object-cover"
+            />
+            <span className="absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+              {noticia.categoria}
+            </span>
+          </div>
+          
+          <div className="p-4 flex flex-col flex-grow">
+            <h2 className={`${merriweather.className} text-lg font-bold mb-2 line-clamp-2`}>
+              {noticia.titulo}
+            </h2>
+            <p className={`${roboto.className} text-sm text-gray-600 mb-2`}>
+              {formatarData(noticia.data)}
+            </p>
+            <p className={`${roboto.className} text-sm text-gray-700 line-clamp-3 mb-4`}>
+              {noticia.descricao}
+            </p>
+            <span 
+              className="mt-auto text-blue-600 hover:text-blue-800 text-sm font-semibold"
             >
-              <div className="flex flex-col bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-110 h-full">
-                <div className="relative">
-                  <Image
-                    src={getImageUrl(noticia)}
-                    alt={noticia.titulo}
-                    width={400}
-                    height={300}
-                    className="w-full h-48 object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <span className="absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {noticia.categoria}
-                  </span>
-                </div>
-                
-                <div className="p-4 flex flex-col flex-grow">
-                  <h2 className={`${merriweather.className} text-lg font-bold mb-2 line-clamp-2`}>
-                    {noticia.titulo}
-                  </h2>
-                  <p className={`${roboto.className} text-sm text-gray-600 mb-2`}>
-                    {formatarData(noticia.data)}
-                  </p>
-                  <p className={`${roboto.className} text-sm text-gray-700 line-clamp-3 mb-4`}>
-                    {noticia.descricao}
-                  </p>
-                  <span 
-                    className="mt-auto text-blue-600 hover:text-blue-800 text-sm font-semibold"
-                  >
-                    Ler mais →
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
+              Ler mais →
+            </span>
+          </div>
         </div>
-      </div>
+      </Link>
+    ))}
+  </div>
+</div>
+
+
+{/* Accordion de perguntas frequentes */}
+
+<div className="w-full flex justify-center bg-gray-100 py-10">
+  <section className="w-full max-w-xl px-4 text-gray-700">
+    <h2 className={`${merriweather.className} text-2xl font-bold mb-6 text-center text-gray-700`}>
+      Perguntas Frequentes
+    </h2>
+    <Accordion items={faqItems} />
+  </section>
+</div>
+
     </>
   );
 }

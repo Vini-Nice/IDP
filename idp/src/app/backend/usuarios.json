@@ -12,7 +12,7 @@
   {
     "cpf": "45678998780",
     "email": "maria@aluno.com",
-    "senha": "88"
+    "senha": "880"
   },
   {
     "cpf": "4356789",
@@ -37,6 +37,21 @@
   {
     "cpf": "34556778990",
     "email": "teste@gestao.com",
-    "senha": "444"
+    "senha": "777"
+  },
+  {
+    "cpf": 123457890,
+    "email": "mariaa@gmail.com",
+    "senha": "gg33"
+  },
+  {
+    "cpf": 123457890,
+    "email": "teste2@aluno.com",
+    "senha": "gg33"
+  },
+  {
+    "cpf": "78697089088",
+    "email": "teste5@aluno.com",
+    "senha": "777"
   }
 ]

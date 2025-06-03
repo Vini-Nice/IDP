@@ -3,14 +3,17 @@
 
 // Importaçãoes 
 
+
 import axios from "axios";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 
+
 // Funcionalidade (Verificação se email é institucional e confirmação/redefinição de senha) 
 
 export default function EsqueciSenha() {
+
   const [email, setEmail] = useState("");
   const [novaSenha, setNovaSenha] = useState("");
   const [csenha, setCsenha] = useState("");
@@ -18,33 +21,37 @@ export default function EsqueciSenha() {
 
   const handleRedefinirSenha = async (e) => {
     e.preventDefault();
-
+  
+    
     if (csenha !== novaSenha) {
       alert('As senhas não coincidem.');
       return;
     }
-
+  
+ 
     const dominiosPermitidos = ["@aluno.com", "@gestao.com", "@gremio.com", "@professor.com"];
     const emailValido = dominiosPermitidos.some((dominio) => email.endsWith(dominio));
-
+  
     if (!emailValido) {
-      alert("Apenas e-mails institucionais são permitidos.");
+      alert("Apenas e-mails institucionais podem trocar de senha. Se você não tem um, por favor, entre em contato conosco.");
       return;
     }
-
+  
     try {
-      const resposta = await axios.post("http://localhost:3001/esquecisenha", {
+     
+      const resposta = await axios.post("http://localhost:3004/esquecisenha", {
         email,
         novaSenha,
       });
-
+  
       alert(resposta.data.mensagem || "Senha atualizada com sucesso!");
       router.push("/Login");
+  
     } catch (err) {
       alert(err.response?.data?.mensagem || "Erro ao redefinir a senha.");
     }
   };
-
+  
 
   // Formulário
 
@@ -70,7 +77,7 @@ export default function EsqueciSenha() {
           <input
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700"
             type="email"
-            placeholder="Digite seu e-mail institucional"
+            placeholder="Digite seu e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
