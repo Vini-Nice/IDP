@@ -10,7 +10,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 import noticiasRotas from './routes/noticiasRotas.js';
-import authRotas from './routes/authRotas.js';
 
 app.use(cors());
 app.use(express.json());
@@ -20,7 +19,6 @@ const uploadPath = path.join(__dirname, 'upload');
 console.log('Pasta de upload:', uploadPath);
 app.use('/upload', express.static(uploadPath));
 
-app.use('/auth', authRotas);
 app.use('/noticias', noticiasRotas);
 
 // Rota para testar se o arquivo existe
