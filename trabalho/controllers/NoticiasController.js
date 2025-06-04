@@ -99,8 +99,8 @@ const atualizarNoticiaController = async (req, res) => {
 
 const excluirNoticiaController = async (req, res) => {
     try {
-        const livroId = req.params.id;
-        await excluirNoticia(livroId);
+        const noticiaId = req.params.id;
+        await excluirNoticia(noticiaId);
         res.status(200).json({ mensagem: 'Noticia excluida com sucesso.' });
     } catch (err) {
         console.error('Erro ao excluir noticia: ', err);
