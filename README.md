@@ -1,7 +1,7 @@
 # IDP
-📰 IDP News – Portal de Notícias do Instituto Dom Pedro II
+📰 IDP News – Portal de Notícias do Colégio Técnico Instituto Dom Pedro II
 
-**IDP News** é um portal institucional desenvolvido com o objetivo de centralizar e divulgar notícias, eventos, comunicados oficiais e informações relevantes do Instituto Dom Pedro II de forma acessível, moderna e organizada.
+**IDP News** é um portal institucional desenvolvido com o objetivo de centralizar e divulgar notícias, eventos, avisos e informações relevantes do Instituto Dom Pedro II de forma acessível, moderna e organizada.
 
 ---
 
@@ -10,7 +10,7 @@
 Criar um ambiente digital onde:
 
 - Estudantes, professores, pais e responsáveis possam acompanhar as atividades do colégio.
-- O setor administrativo tenha uma interface segura e prática para publicar, editar e gerenciar conteúdos.
+- O setor administrativo tenha uma interface segura e prática para publicar, editar e deletar conteúdos.
 
 ---
 
@@ -25,7 +25,7 @@ A coordenadora pedagógica **Profa. Mariana Souza** sugeriu a criação de um po
 ## 🔧 Tecnologias Utilizadas
 
 - Frontend: HTML5, CSS3, JavaScript, [Next.js]
-- Backend: Node.js, Express
+- Backend: Node.js, Express, Cors, Path
 - Banco de Dados: MYSQL
 
 
@@ -40,8 +40,9 @@ A coordenadora pedagógica **Profa. Mariana Souza** sugeriu a criação de um po
 ### Área Administrativa (Privada)
 - Login com autenticação por tipo de usuário
 - Publicação, edição e exclusão de conteúdos
-- Gerenciamento de categorias e imagens
-- Recuperação de senha via e-mail
+- Gerenciamento por ID
+- Recuperação de senha no própio site para emails institucionais
+  
 
 ---
 
@@ -56,7 +57,8 @@ https://github.com/Vini-Nice/IDP.git
 cd idp-news
 
 # Instale as dependências
-npm install
+
+npm install  Node.js, Express, Cors, Path
 
 # Inicie o servidor de desenvolvimento
 npm run dev
