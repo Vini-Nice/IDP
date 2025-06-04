@@ -9,6 +9,26 @@ export default function ListaNoticias() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const router = useRouter();
+    const [tipoUsuario, setTipoUsuario] = useState(); // visitante = padrão
+
+
+    // De acordo com o tipo de usuário execulta certas funções (exemplo: alunos só podem criar notícias)
+useEffect(() => {
+  const dados = JSON.parse(localStorage.getItem('usuarioAutenticado'));
+  if (dados?.email) {
+    const email = dados.email;
+    if (email.endsWith('@gestao.com')) {
+      setTipoUsuario('gestao');
+    } else if (email.endsWith('@professor.com') || email.endsWith('@gremio.com')) {
+      setTipoUsuario('colaborador');
+    } else if (email.endsWith('@aluno.com')) {
+      setTipoUsuario('aluno');
+    } else {
+        setTipoUsuario('visitante')
+    } 
+  }
+}, []);
+
 
     useEffect(() => {
         fetchNoticias();
@@ -77,17 +97,29 @@ export default function ListaNoticias() {
     }
 
     return (
+       
         <div className="min-h-screen bg-gray-50 p-8">
+           
+
             <div className="max-w-7xl mx-auto">
+            
                 <div className="flex justify-between items-center mb-8">
+                {(tipoUsuario !== 'aluno' && tipoUsuario !== 'visitante') && (
+               
                     <h1 className="text-3xl font-bold text-gray-800">Gerenciar Notícias</h1>
+                )}
+                    
+                    {(tipoUsuario !== 'aluno' && tipoUsuario !== 'visitante') && (
                     <button
                         onClick={() => router.push('/Criar')}
                         className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300"
                     >
                         Nova Notícia
                     </button>
+            )}
+                    
                 </div>
+           
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {noticias.map((noticia) => (
@@ -112,6 +144,9 @@ export default function ListaNoticias() {
                                     <span className="text-sm text-gray-500">
                                         {new Date(noticia.data).toLocaleDateString('pt-BR')}
                                     </span>
+
+                                    {tipoUsuario === 'gestao' && (
+
                                     <div className="space-x-2">
                                         <button
                                             onClick={() => handleEditar(noticia.id_noticias)}
@@ -126,6 +161,9 @@ export default function ListaNoticias() {
                                             Excluir
                                         </button>
                                     </div>
+                                     )}
+
+
                                 </div>
                             </div>
                         </div>
