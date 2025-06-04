@@ -1,4 +1,7 @@
 # IDP
+
+
+
 📰 IDP News – Portal de Notícias do Instituto Dom Pedro II
 
 **IDP News** é um portal institucional desenvolvido com o objetivo de centralizar e divulgar notícias, eventos, comunicados oficiais e informações relevantes do Instituto Dom Pedro II de forma acessível, moderna e organizada.
