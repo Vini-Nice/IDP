@@ -25,7 +25,7 @@ export default function Cadastro() {
     }
 
     try {
-      const res = await axios.post('http://localhost:3001/api/cadastrar', {
+      const res = await axios.post('http://localhost:3004/cadastro', {
         cpf,
         email,
         senha,
@@ -54,7 +54,7 @@ style={{backgroundImage: "url('/geral.imgs/fundo.png')"}}
       <div className="mt-90 w-full max-w-md rounded-2xl shadow-lg p-6 bg-white/90">
         <h2 className="text-2xl font-bold text-center text-blue-700">Bem-vindo ao IDP!</h2>
         <p className="text-center text-gray-700 mt-4">
-          Cadastre-se com seu email institucional para começar sua jornada acadêmica.
+          Cadastre-se com seu email para começar sua jornada acadêmica.
         </p>
         <p className="text-center text-gray-500 mt-1">É sempre um prazer te ter aqui.</p>
 

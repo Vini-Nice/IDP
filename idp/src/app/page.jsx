@@ -1,8 +1,12 @@
-import Image from "next/image";
-import Carousel from "./components/Carousel/Carousel";
-import CardNoticies from "./components/cardsNoticies/cardsNoticies";
+'use client';
 
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import Carousel from "./components/Carousel/Carousel";
+import { buscarNoticias } from "./services/noticiasService";
 import { Roboto, Merriweather, Playfair_Display } from 'next/font/google';
+import Accordion from "./components/Accordion/Accordion.js";
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -19,92 +23,174 @@ const playfairDisplay = Playfair_Display({
   weight: ['400', '700'],
 });
 
+// Perguntas frequentes e respostas 
+const faqItems = [
+  {
+    question: 'Todos podem criar, editar ou deletar notícias?',
+    answer: 'Os alunos só podem visualizar as notícias, já os professores, a gestão e o grêmio têm a possibilidade de criar também. Somente a gestão pode deletar e atualizar notícias.',
+  },
+  {
+    question: 'Como posso verificar meu email institucional?',
+    answer: 'Entre em contato conosco para receber seu email institucional, caso você trabalhe ou estude em nosso colégio técnico.',
+  },
+  {
+    question: 'De quanto em quanto tempo as notícias são atualizadas?',
+    answer: 'As notícias deste portal são atualizadas diariamente.',
+  },
+  {
+    question: 'Se eu não tenho email institucional, posso atualizar, criar ou deletar alguma notícia?',
+    answer: 'Não. Se você não possui email institucional, não pode criar, deletar ou atualizar notícias, apenas visualizar. Além disso, não poderá atualizar sua senha no portal. Caso esqueça a senha, entre em contato ou vá até o colégio.',
+  },
+];
+
+
+
+
+
 
 export default function Home() {
-  const images = [
-    "/imgs/imgsteste/futsal.jpeg",
-    "/imgs/imgsteste/junina.png",
-    "/imgs/imgsteste/exame.jpg",
-    "/imgs/imgsteste/reuniao.png",
-  ];
+  const [noticias, setNoticias] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  
+  useEffect(() => {
+    const carregarNoticias = async () => {
+      try {
+        const data = await buscarNoticias();
+        setNoticias(data);
+      } catch (error) {
+        console.error('Erro ao carregar notícias:', error);
+        setError('Falha ao carregar notícias. Tente novamente mais tarde.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    carregarNoticias();
+  }, []);
+
+  // Função para formatar a data
+  const formatarData = (data) => {
+    return new Date(data).toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  };
+
+  // Função para pegar a imagem (com fallback)
+  const getImageUrl = (noticia) => {
+    if (!noticia.imagem) return '/noticias.imgs/default.png';
+    
+    // Se a imagem começar com 'not' ou estiver no formato antigo
+    if (noticia.imagem.startsWith('not') || noticia.imagem.startsWith('/noticias.imgs/')) {
+      return `/noticias.imgs/${noticia.imagem.replace('/noticias.imgs/', '')}`;
+    }
+    
+    // Caso contrário, é uma imagem nova do upload
+    return `http://localhost:3001/upload/${noticia.imagem}`;
+  };
+
+  // Pega as imagens das 4 notícias mais recentes para o carrossel
+  const carouselImages = noticias
+    .slice(0, 4)
+    .map(noticia => getImageUrl(noticia));
+
+  if (loading) {
+    return (
+      <div className="h-full min-h-48 flex items-center justify-center">
+        <p className={`${roboto.className}`}>Carregando notícias...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="h-full min-h-48 flex items-center justify-center">
+        <p className={`${roboto.className} text-red-500`}>{error}</p>
+      </div>
+    );
+  }
 
   return (
     <>
-      {/* ----------------------- CARROSSEL --------------------------------------------*/}
-      
+
+      {/* Carrossel */}
+
       <div className="h-full min-h-48 flex flex-col items-center justify-center p-2 bg-gray-100">
-        <h2 className={`${merriweather.className} text-black italic font-bold`}>Principais notícias</h2>
-        <Carousel images={images} />
+        <h2 className={`${merriweather.className} text-black italic font-bold mb-4`}>
+          Principais notícias
+        </h2>
+        <Carousel 
+          images={carouselImages.length > 0 ? carouselImages : [
+            "/imgs/imgsteste/futsal.jpeg",
+            "/imgs/imgsteste/junina.png",
+            "/imgs/imgsteste/exame.jpg",
+            "/imgs/imgsteste/reuniao.png",
+          ]} 
+        />
       </div>
 
       <br className="bg-gray-100" />
 
-      <div className="flex w-full items-center justify-center p-3 bg-gray-100 text-black">
+
+      {/* Grid de Notícias */}
+
+<div className="flex w-full items-center justify-center p-3 bg-gray-100 text-black">
   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full max-w-6xl">
-    {/* ----------------------- CARD 1 --------------------------------------------*/}
-    <div className="flex flex-col items-center p-4 hover:scale-115 transition-transform duration-300 ease-in-out">
-      <h2 className={`${merriweather.className} text-lg font-bold mb-2`}>
-        Título notícia
-      </h2>
-      <div className="w-full aspect-video overflow-hidden rounded-sm border">
-        <img
-          src={"/imgs/imgsteste/auditorio.jpg"}
-          alt={"Foto noticia"}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <p className={`${roboto.className} text-sm mt-4 text-justify`}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod quis
-        minus soluta tempore ab eligendi molestiae, excepturi, eius alias ipsa
-        voluptatibus natus voluptate quibusdam possimus reprehenderit.
-        Assumenda, totam. Sit, laboriosam?
-      </p>
-    </div>
-
-    {/* ----------------------- CARD 2 --------------------------------------------*/}
-    <div className="flex flex-col items-center p-4 hover:scale-115 transition-transform duration-300 ease-in-out">
-      <h2 className={`${merriweather.className} text-lg font-bold mb-2`}>
-        Título notícia
-      </h2>
-      <div className="w-full aspect-video overflow-hidden rounded-sm border">
-        <img
-          src={"/imgs/imgsteste/biblioteca.jpg"}
-          alt={"Foto noticia"}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <p className={`${roboto.className} text-sm mt-4 text-justify`}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod quis
-        minus soluta tempore ab eligendi molestiae, excepturi, eius alias ipsa
-        voluptatibus natus voluptate quibusdam possimus reprehenderit.
-        Assumenda, totam. Sit, laboriosam?
-      </p>
-    </div>
-
-    {/* ----------------------- CARD 3 --------------------------------------------*/}
-    <div className="flex flex-col items-center p-4 hover:scale-115 transition-transform duration-300 ease-in-out">
-      <h2 className={`${merriweather.className} text-lg font-bold mb-2`}>
-        Título notícia
-      </h2>
-      <div className="w-full aspect-video overflow-hidden rounded-sm border">
-        <img
-          src={"/imgs/imgsteste/futsal.jpeg"}
-          alt={"Foto noticia"}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <p className={`${roboto.className} text-sm mt-4 text-justify`}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod quis
-        minus soluta tempore ab eligendi molestiae, excepturi, eius alias ipsa
-        voluptatibus natus voluptate quibusdam possimus reprehenderit.
-        Assumenda, totam. Sit, laboriosam?
-      </p>
-    </div>
+    {noticias.map((noticia) => (
+      <Link 
+        href={`/noticias/${noticia.id_noticias}`}
+        key={noticia.id_noticias}
+        className="block"
+      >
+        <div className="flex flex-col bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:transform hover:scale-110 h-full">
+          <div className="relative">
+            <Image
+              src={getImageUrl(noticia)}
+              alt={noticia.titulo}
+              width={400}
+              height={300}
+              className="w-full h-48 object-cover"
+            />
+            <span className="absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+              {noticia.categoria}
+            </span>
+          </div>
+          
+          <div className="p-4 flex flex-col flex-grow">
+            <h2 className={`${merriweather.className} text-lg font-bold mb-2 line-clamp-2`}>
+              {noticia.titulo}
+            </h2>
+            <p className={`${roboto.className} text-sm text-gray-600 mb-2`}>
+              {formatarData(noticia.data)}
+            </p>
+            <p className={`${roboto.className} text-sm text-gray-700 line-clamp-3 mb-4`}>
+              {noticia.descricao}
+            </p>
+            <span 
+              className="mt-auto text-blue-600 hover:text-blue-800 text-sm font-semibold"
+            >
+              Ler mais →
+            </span>
+          </div>
+        </div>
+      </Link>
+    ))}
   </div>
 </div>
 
+
+{/* Accordion de perguntas frequentes */}
+
+<div className="w-full flex justify-center bg-gray-100 py-10">
+  <section className="w-full max-w-xl px-4 text-gray-700">
+    <h2 className={`${merriweather.className} text-2xl font-bold mb-6 text-center text-gray-700`}>
+      Perguntas Frequentes
+    </h2>
+    <Accordion items={faqItems} />
+  </section>
+</div>
 
     </>
   );

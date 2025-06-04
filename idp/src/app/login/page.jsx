@@ -23,7 +23,7 @@ export default function LoginPage() {
     }
 
     try {
-      const resposta = await axios.post('http://localhost:3001/login', {
+      const resposta = await axios.post('http://localhost:3004/login', {
         email,
         senha,
       });
@@ -39,14 +39,14 @@ export default function LoginPage() {
       if (emailUsuario.endsWith('@aluno.com')) {
         router.push('/');
       } else if (emailUsuario.endsWith('@gestao.com')) {
-        router.push('/');
+        router.push('/noticias');
       } else if (
         emailUsuario.endsWith('@gremio.com') ||
         emailUsuario.endsWith('@professor.com')
       ) {
         router.push('/');
       } else {
-        alert('Você não pode ter acesso a esse site infelizmente, só pessoas que estudam ou trabalham no Colégio.');
+        router.push('/');
       }
 
     } catch (erro) {
@@ -155,6 +155,12 @@ style={{backgroundImage: "url('/geral.imgs/fundo.png')",
     </div>
   );
 }
+
+
+
+
+
+
 
 
 
