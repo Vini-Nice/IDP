@@ -104,6 +104,7 @@ useEffect(() => {
             <div className="max-w-7xl mx-auto">
             
                 <div className="flex justify-between items-center mb-8">
+
                 {(tipoUsuario !== 'aluno' && tipoUsuario !== 'visitante') && (
                
                     <h1 className="text-3xl font-bold text-gray-800">Gerenciar Notícias</h1>
