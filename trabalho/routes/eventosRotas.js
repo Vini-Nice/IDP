@@ -44,4 +44,14 @@ router.put('/:id', upload.single('imagem'), atualizarEventoController);
 // Excluir um evento
 router.delete('/:id', excluirEventoController);
 
+router.options('/', (req, res) => {
+    res.setHeader('Allow', 'GET, POST, OPTIONS');
+    res.status(204).send();
+});
+
+router.options('/:id', (req, res) => {
+    res.setHeader('Allow', 'GET, PUT, DELETE, OPTIONS');
+    res.status(204).send();
+});
+
 export default router; 

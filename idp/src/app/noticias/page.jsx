@@ -9,7 +9,7 @@ export default function ListaNoticias() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const router = useRouter();
-    const [tipoUsuario, setTipoUsuario] = useState(); // visitante = padrão
+    const [tipoUsuario, setTipoUsuario] = useState('visitante'); // visitante = padrão
 
 
     // De acordo com o tipo de usuário execulta certas funções (exemplo: alunos só podem criar notícias)
