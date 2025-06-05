@@ -31,8 +31,10 @@ CREATE TABLE Eventos (
 id_Eventos INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 titulo TEXT NOT NULL,
 texto TEXT NOT NULL,
-imagem VARCHAR(255),
-data DATE NOT NULL
+data_inicio DATETIME NOT NULL,
+data_fim DATETIME NOT NULL,
+local VARCHAR(255) NOT NULL,
+imagem VARCHAR(255)
 );
 
 INSERT INTO Usuarios (nome, email, senha, cargo) 

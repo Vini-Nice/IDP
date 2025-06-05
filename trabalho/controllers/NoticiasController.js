@@ -35,15 +35,14 @@ const obterNoticiaPorIdController = async (req, res) => {
 
 const criarNoticiaController = async (req, res) => {
     try {
+        console.log('Corpo da requisição recebido:', req.body);
+        console.log('Arquivo recebido:', req.file);
+        
         const { titulo, descricao, data, usuario, categoria } = req.body;
         let imagemPath = null;
         
         if (req.file) {
-            // Salva apenas o nome do arquivo
             imagemPath = req.file.filename;
-            
-            // Log para debug
-            console.log('Arquivo recebido:', req.file);
             console.log('Nome do arquivo:', imagemPath);
             console.log('Caminho completo:', path.join(__dirname, '../upload', imagemPath));
         }
@@ -57,13 +56,14 @@ const criarNoticiaController = async (req, res) => {
             categoria
         };
 
-        // Log para debug
         console.log('Dados da notícia a ser criada:', noticiaData);
 
         const noticiaId = await criarNoticia(noticiaData);
+        console.log('Notícia criada com sucesso. ID:', noticiaId);
+        
         res.status(201).json({ mensagem: 'Noticia criada com sucesso', noticiaId, noticia: noticiaData });
     } catch (err) {
-        console.error('Erro ao criar a noticia: ', err);
+        console.error('Erro detalhado ao criar a noticia:', err);
         res.status(500).json({ mensagem: 'Erro ao criar noticia', erro: err.message });
     }
 };

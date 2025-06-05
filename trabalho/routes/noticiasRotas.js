@@ -1,6 +1,5 @@
 import express from 'express';
 import { listarNoticiasController, obterNoticiaPorIdController, criarNoticiaController, atualizarNoticiaController, excluirNoticiaController } from '../controllers/NoticiasController.js';
-import authMiddleware from '../middleware/authMiddleware.js';
 import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -28,11 +27,11 @@ const router = express.Router();
 router.get('/', listarNoticiasController);
 router.get('/:id', obterNoticiaPorIdController);
 
-router.post('/', authMiddleware, upload.single('imagem'), criarNoticiaController);
+router.post('/', upload.single('imagem'), criarNoticiaController);
 
-router.put('/:id', authMiddleware, upload.single('imagem'), atualizarNoticiaController);
+router.put('/:id', upload.single('imagem'), atualizarNoticiaController);
 
-router.delete('/:id', authMiddleware, excluirNoticiaController);
+router.delete('/:id', excluirNoticiaController);
 
 router.options('/', (req, res) => {
     res.setHeader('Allow', 'GET, POST, OPTIONS');
