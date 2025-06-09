@@ -70,7 +70,7 @@ cd idp
 
 # Instale as dependências
 
-npm install  Node.js, Express, Cors, Path e inputmask
+npm install  Node.js, Express, Cors, Path e Inputmask
 
 # Inicie o servidor de desenvolvimento
 npm run dev
