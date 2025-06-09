@@ -41,7 +41,7 @@ export default function LoginPage() {
       if (emailUsuario.endsWith('@aluno.com')) {
         router.push('/');
       } else if (emailUsuario.endsWith('@gestao.com')) {
-        router.push('/noticias');
+        router.push('/');
       } else if (
         emailUsuario.endsWith('@gremio.com') ||
         emailUsuario.endsWith('@professor.com')
