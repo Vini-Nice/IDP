@@ -188,13 +188,13 @@ export default function LoginPage() {
             </div>
             <div className="flex flex-col items-center space-y-3 text-sm">
               <button
-                onClick={() => router.push('/cadastro')}
+                onClick={() => router.push('/Cadastro')}
                 className="text-blue-600 hover:text-blue-800 font-medium transition duration-200"
               >
                 Não tem conta? Cadastre-se aqui
               </button>
               <button
-                onClick={() => router.push('/esquecisenha')}
+                onClick={() => router.push('/Esquecisenha')}
                 className="text-gray-600 hover:text-gray-800 transition duration-200"
               >
                 Esqueceu sua senha?

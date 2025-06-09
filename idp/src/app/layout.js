@@ -25,6 +25,10 @@ const playfairDisplay = Playfair_Display({
   variable: '--font-playfair-display',
 });
 
+
+
+// Para esconder os componentes Header e Footer das páginas de Login, Cadastro e Esqueci senha
+
 export default function RootLayout({ children }) {
   const pathname = usePathname();
 

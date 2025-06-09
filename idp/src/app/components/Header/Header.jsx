@@ -108,13 +108,13 @@ export default function Header() {
                             ) : (
                                 <div className="flex gap-4">
                                     <Link 
-                                        href="/login"
+                                        href="/Login"
                                         className="bg-white hover:bg-gray-100 text-blue-600 font-bold py-2.5 px-5 rounded-lg transition-colors text-lg"
                                     >
                                         Entrar
                                     </Link>
                                     <Link 
-                                        href="/cadastro"
+                                        href="/Cadastro"
                                         className="bg-white hover:bg-gray-100 text-blue-600 font-bold py-2.5 px-5 rounded-lg transition-colors text-lg"
                                     >
                                         Cadastre-se
@@ -190,14 +190,14 @@ export default function Header() {
                             ) : (
                                 <div className="border-t border-blue-800 pt-2 space-y-1">
                                     <Link
-                                        href="/login"
+                                        href="/Login"
                                         className="block px-3 py-2.5 text-white hover:bg-blue-800 rounded-md transition-colors text-lg"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         Entrar
                                     </Link>
                                     <Link
-                                        href="/cadastro"
+                                        href="/Cadastro"
                                         className="block px-3 py-2.5 text-white hover:bg-blue-800 rounded-md transition-colors text-lg"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >

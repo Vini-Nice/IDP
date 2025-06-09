@@ -47,7 +47,7 @@ export default function EsqueciSenha() {
       });
   
       alert(resposta.data.mensagem || "Senha atualizada com sucesso!");
-      router.push("/login");
+      router.push("/Login");
   
     } catch (err) {
       alert(err.response?.data?.mensagem || "Erro ao redefinir a senha.");
@@ -182,7 +182,7 @@ export default function EsqueciSenha() {
             </div>
             <div className="text-center">
               <button
-                onClick={() => router.push('/login')}
+                onClick={() => router.push('/Login')}
                 className="text-blue-600 hover:text-blue-800 font-medium transition duration-200"
               >
                 Voltar para o login
