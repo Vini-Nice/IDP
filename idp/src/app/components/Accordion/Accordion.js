@@ -3,7 +3,12 @@
 // Importação
 
 import { useState } from "react";
+import { Merriweather } from 'next/font/google';
 
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 
 // Accordion e estilização
 
@@ -15,32 +20,37 @@ export default function Accordion({ items }) {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white rounded shadow-md items-center justify-center">
+    <div className="bg-white rounded-xl shadow-sm overflow-hidden">
       {items.map((item, index) => (
-        <div key={index} className="border-b border-gray-300">
+        <div key={index} className="border-b border-gray-100 last:border-b-0">
           <button
-            className="w-full px-4 py-3 text-left flex justify-between items-center focus:outline-none"
+            className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:bg-gray-50"
             onClick={() => toggleIndex(index)}
           >
-            <span className="font-medium">{item.question}</span>
+            <span className={`${merriweather.className} font-medium text-gray-800 pr-4`}>
+              {item.question}
+            </span>
             <svg
-              className={`w-5 h-5 transition-transform duration-300 ${
+              className={`w-5 h-5 text-blue-600 transition-transform duration-300 flex-shrink-0 ${
                 activeIndex === index ? "rotate-180" : ""
               }`}
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="2.5"
               viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          {activeIndex === index && (
-            <div className="px-4 py-3 text-black-700 bg-gray-300">
+          <div 
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              activeIndex === index ? "max-h-96" : "max-h-0"
+            }`}
+          >
+            <div className="px-6 py-4 text-gray-600 bg-gray-50">
               {item.answer}
             </div>
-          )}
+          </div>
         </div>
       ))}
     </div>
