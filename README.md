@@ -66,11 +66,11 @@ No bash
 https://github.com/Vini-Nice/IDP.git
 
 # Acesse a pasta
-cd idp-news
+cd idp
 
 # Instale as dependências
 
-npm install  Node.js, Express, Cors, Path
+npm install  Node.js, Express, Cors, Path e inputmask
 
 # Inicie o servidor de desenvolvimento
 npm run dev
