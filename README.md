@@ -1,6 +1,11 @@
 # IDP
 
 
+
+📰 IDP News – Portal de Notícias do Instituto Dom Pedro II
+ 
+
+
 ![logoofc](https://github.com/user-attachments/assets/7bf05b81-5ff1-4d13-bf1c-fca4bf6f2733)
 
 

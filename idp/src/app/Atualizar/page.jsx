@@ -1,10 +1,31 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Roboto, Merriweather } from 'next/font/google';
+
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['400', '700'],
+});
+
+const merriweather = Merriweather({
+    subsets: ['latin'],
+    weight: ['400', '700'],
+});
+
+const CATEGORIAS = [
+    'Educação',
+    'Esporte',
+    'Tecnologia',
+    'Sustentabilidade',
+    'Economia',
+    'Cultura'
+];
 
 export default function Atualizar() {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const noticiaId = searchParams.get('id_noticias');
 
     const [formData, setFormData] = useState({
@@ -17,22 +38,30 @@ export default function Atualizar() {
         categoria: ''
     });
 
+    const [preview, setPreview] = useState(null);
     const [responseContent, setResponseContent] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (!noticiaId) return;
 
         setFormData(prev => ({ ...prev, id_noticias: noticiaId }));
+        setIsLoading(true);
 
         fetch(`http://localhost:3001/noticias/${noticiaId}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Notícia não encontrada');
+            }
+            return response.json();
+        })
         .then(data => {
             setFormData({
                 id_noticias: noticiaId,
                 titulo: data.titulo || '',
                 descricao: data.descricao || '',
                 data: data.data?.substring(0, 10) || '',
-                imagem: null, // não vem da API
+                imagem: null,
                 usuario: data.usuario || '',
                 categoria: data.categoria || ''
             });
@@ -40,173 +69,237 @@ export default function Atualizar() {
         .catch(error => {
             console.error('Erro ao carregar a notícia:', error);
             setResponseContent('Erro ao carregar as informações da notícia.');
+        })
+        .finally(() => {
+            setIsLoading(false);
         });
     }, [noticiaId]);
 
     function handleChange(e) {
-        const { name, value, files } =e.target;
+        const { name, value, files } = e.target;
 
-        setFormData(prev => ({
-            ...prev,
-            [name]: files ? files[0] : value
-        }));
+        if (name === 'imagem' && files?.length > 0) {
+            setFormData(prev => ({
+                ...prev,
+                [name]: files[0]
+            }));
+            
+            // Criar preview da imagem
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result);
+            };
+            reader.readAsDataURL(files[0]);
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                [name]: value
+            }));
+        }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
       
         const formElement = e.target;
         const formDataToSend = new FormData(formElement);
       
         try {
-          const response = await fetch(`http://localhost:3001/noticias/${formData.id_noticias}`, {
-            method: 'PUT',
-            headers: {
-              'Authorization': 'SEGREDO'
-            },
-            body: formDataToSend
-          });
+            const response = await fetch(`http://localhost:3001/noticias/${formData.id_noticias}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'SEGREDO'
+                },
+                body: formDataToSend
+            });
 
-          if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Erro ${response.status}: ${errorText}`);
-          } 
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Erro ${response.status}: ${errorText}`);
+            } 
       
-          const result = await response.json();
-          setResponseContent(JSON.stringify(result, null, 2));
+            setResponseContent('Notícia atualizada com sucesso!');
+            
+            // Redireciona após 2 segundos
+            setTimeout(() => {
+                router.push('/');
+            }, 2000);
         } catch (error) {
-          console.error('Erro ao atualizar notícia:', error);
-          setResponseContent('Erro ao atualizar notícia.');
+            console.error('Erro ao atualizar notícia:', error);
+            setResponseContent('Erro ao atualizar notícia. Por favor, tente novamente.');
+        } finally {
+            setIsLoading(false);
         }
-      };
+    };
 
-    if(!noticiaId) {
-        return   <div className="bg-black min-h-screen py-100">
-          <div className="max-w-2x1 mx-auto p-40 shadow-lg rouded-2x1">
-          <h1 className="text-2x1 font-bold mb-10 text-red-800 text-center" style={{ color: 'red' }}>ID da notícia não especificado na URL. Use: ?id_noticias=SEU_ID</h1></div></div>;
+    if (!noticiaId) {
+        return (
+            <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                <div className="max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-xl">
+                    <h1 className={`${merriweather.className} text-2xl font-bold text-gray-800 text-center mb-4`}>
+                        Acesso Inválido
+                    </h1>
+                    <p className={`${roboto.className} text-gray-600 text-center`}>
+                        Você precisa selecionar uma notícia para editar.
+                    </p>
+                    <div className="mt-6 text-center">
+                        <button
+                            onClick={() => router.push('/')}
+                            className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                        >
+                            Voltar para Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
     }
     
-    // useEffect(() => {
-    //     function getParameterByName(name, url = window.location.href) {
-    //         name = name.replace(/[\[\]]/g, '\\$&');
-    //         var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-    //             results = regex.exec(url);
-    //         if (!results) return null;
-    //         if (!results[2]) return '';
-    //         return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    //     }
-        
-    //     const noticiaId = getParameterByName('id_noticias');
-        
-    //     if (!noticiaId) {
-    //         document.body.innerHTML = '<p style="color: red;">ID da noticia não especificado na URL. Use: testeUpdate.html?id=SEU_ID</p>';
-    //     } else {
-    //         document.getElementById('id_noticias').value = noticiaId;
-        
-    //         fetch(`http://localhost:3000/noticias/${noticiaId}`)
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 document.getElementById('titulo').value = data.titulo || '';
-    //                 document.getElementById('descricao').value = data.descricao || '';
-    //                 document.getElementById('data').value = data.data.substring(0, 10) || '';
-    //                 document.getElementById('imagem').value = data.imagem || '';
-    //                 document.getElementById('usuario').value = data.usuario || '';
-    //                 document.getElementById('categoria').value = data.categoria || '';
-    //             })
-    //             .catch(error => {
-    //                 console.error('Erro ao carregar as informações do noticia:', error);
-    //                 document.getElementById('responseContent').textContent = 'Erro ao carregar as informações do noticia.';
-    //             });
-        
-    //         document.getElementById('noticiaForm').addEventListener('submit', async function(event) {
-    //             event.preventDefault();
-        
-    //             const dataInput = document.getElementById('data');
-    //             dataInput.value = dataInput.value.substring(0, 10);
-        
-    //             const form = document.getElementById('noticiaForm');
-    //             const formData = new FormData(form);
-        
-    //             try {
-    //                 const response = await fetch(`http://localhost:3000/noticias/${noticiaId}`, {
-    //                     method: 'PUT',
-    //                     headers: {
-    //                         'Authorization': `SEGREDO` // Substitua pelo seu token JWT
-    //                     },
-    //                     body: formData
-                        
-    //                 });
-        
-    //                 const data = await response.json();
-    //                 document.getElementById('responseContent').textContent = JSON.stringify(data, null, 2);
-    //             } catch (error) {
-    //                 console.error('Erro:', error);
-    //                 document.getElementById('responseContent').textContent = 'Erro ao enviar os dados.';
-    //             }
-    //         });
-    //     }
-    // })
     return (
-<>
-  <div className="bg-black min-h-screen py-10">
+        <div className="min-h-screen py-10 bg-gray-50">
+            <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-xl">
+                <h1 className={`${merriweather.className} text-3xl font-bold mb-6 text-gray-800 text-center`}>
+                    Editar Notícia
+                </h1>
 
-<div className="max-w-2x1 mx-auto p-6 shadow-lg rounded-2x1">
-  <h1 className="text-2x4 font-bold mb-6 text-white-800 text-center">Editar Noticia</h1>
+                {isLoading ? (
+                    <div className="text-center py-8">
+                        <p className={`${roboto.className} text-gray-600`}>Carregando...</p>
+                    </div>
+                ) : (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <input type="hidden" name="id_noticias" value={formData.id_noticias} />
 
+                        {/* Título */}
+                        <div>
+                            <label className={`${roboto.className} block text-sm font-medium text-gray-700 mb-1`}>
+                                Título
+                            </label>
+                            <input
+                                type="text"
+                                name="titulo"
+                                value={formData.titulo}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+                                required
+                            />
+                        </div>
 
+                        {/* Descrição */}
+                        <div>
+                            <label className={`${roboto.className} block text-sm font-medium text-gray-700 mb-1`}>
+                                Descrição
+                            </label>
+                            <textarea
+                                name="descricao"
+                                value={formData.descricao}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 h-32"
+                                required
+                            />
+                        </div>
 
-  <form id="noticiaForm" onSubmit={handleSubmit} className="space-y-4">
+                        {/* Data */}
+                        <div>
+                            <label className={`${roboto.className} block text-sm font-medium text-gray-700 mb-1`}>
+                                Data da Postagem
+                            </label>
+                            <input
+                                type="date"
+                                name="data"
+                                value={formData.data}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+                                required
+                            />
+                        </div>
 
-  
-    <div>
-    <label htmlFor="id_noticias"></label >
-    <input type="hidden" name="id_noticias" value={formData.id_noticias} onChange={handleChange}/>
-    </div>
+                        {/* Imagem */}
+                        <div>
+                            <label className={`${roboto.className} block text-sm font-medium text-gray-700 mb-1`}>
+                                Nova Imagem
+                            </label>
+                            <input
+                                type="file"
+                                name="imagem"
+                                onChange={handleChange}
+                                accept="image/*"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+                            />
+                            <p className={`${roboto.className} mt-1 text-sm text-gray-500`}>
+                                Deixe em branco para manter a imagem atual
+                            </p>
+                            {preview && (
+                                <div className="mt-4">
+                                    <img
+                                        src={preview}
+                                        alt="Preview"
+                                        className="w-full max-h-64 object-cover rounded-lg"
+                                    />
+                                </div>
+                            )}
+                        </div>
 
+                        {/* Usuário */}
+                        <div>
+                            <label className={`${roboto.className} block text-sm font-medium text-gray-700 mb-1`}>
+                                ID do Usuário
+                            </label>
+                            <input
+                                type="number"
+                                name="usuario"
+                                value={formData.usuario}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+                                required
+                            />
+                        </div>
 
-    <div>
-    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="titulo">Título:</label>
-    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="titulo" name="titulo" required="" value={formData.titulo} onChange={handleChange} />
-    </div>
+                        {/* Categoria */}
+                        <div>
+                            <label className={`${roboto.className} block text-sm font-medium text-gray-700 mb-1`}>
+                                Categoria
+                            </label>
+                            <select
+                                name="categoria"
+                                value={formData.categoria}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+                                required
+                            >
+                                <option value="">Selecione uma categoria</option>
+                                {CATEGORIAS.map(categoria => (
+                                    <option key={categoria} value={categoria}>
+                                        {categoria}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-    <div>
-    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="descricao">Descrição:</label>
-    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="descricao" name="descricao" required="" value={formData.descricao} onChange={handleChange} />
-    </div>
+                        {/* Botão Submit */}
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className={`
+                                ${roboto.className}
+                                w-full bg-blue-600 text-white py-2 px-4 rounded-lg 
+                                hover:bg-blue-700 transition duration-300 
+                                disabled:opacity-50 disabled:cursor-not-allowed
+                            `}
+                        >
+                            {isLoading ? 'Atualizando...' : 'Atualizar Notícia'}
+                        </button>
+                    </form>
+                )}
 
-    <div> 
-    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="data">Data da Postagem:</label>
-    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="date" id="data" name="data" required="" value={formData.data} onChange={handleChange} />
-    </div>
-
-
-    <div>
-    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="imagem">Imagem da Postagem:</label>
-    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="file" id="imagem" name="imagem" accept="image/*" onChange={handleChange} />
-    </div>
-
-    <div>
-    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="usuario">ID do Usuário:</label>
-    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="usuario" name="usuario" required="" value={formData.usuario} onChange={handleChange} />
-    </div>
-
-    <div >
-    <label className="block text-sm font-sm font-medium text-gray-700" htmlFor="categoria">Categoria da Noticia:</label>
-    <input className="mt-1 block w-full py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white-700" type="text" id="categoria" name="categoria" required="" value={formData.categoria} onChange={handleChange} />
-    </div>
-
-    <button 
-    className="w-100 bg-red-900 text-gray py-2 px-4 rouded-lg hover:bg-blue-900 transition duration-300"
-    type="submit">Atualizar Noticia.</button>
-  </form>
-  <div id="response" className="mt-6">
-    Resposta do Servidor:
-    <pre  className="bg-gray-400 p-4 rouded-lg mt-2 text-sm text-gray-900" >{responseContent}</pre>
-  </div>
-  </div>
-  </div>
-</>
-
-    )
+                {responseContent && (
+                    <div className={`mt-6 p-4 rounded-lg ${responseContent.includes('sucesso') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                        <p className={`${roboto.className}`}>{responseContent}</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 }
 
