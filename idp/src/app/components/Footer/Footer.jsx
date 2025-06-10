@@ -14,7 +14,8 @@ export default function Footer() {
 
                 <div className="m-auto "> {/* div das informações, tipo a história e localização*/}
                     <h2 className="capitalize font-bold">Colégio Instituto Dom Pedro II</h2>
-                    <p>Localização- Av. 203, Unid 203, Rua 13, 57, São Luís - MA, 65058-009</p>
+                    <p><a href="https://www.google.com.br/maps/@-23.5778725,-46.6435895,3a,75y,339.85h,106.69t/data=!3m7!1e1!3m5!1sd8dVnMvHPpDf-deD5tcgXA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-16.686744241688572%26panoid%3Dd8dVnMvHPpDf-deD5tcgXA%26yaw%3D339.8529380678685!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI1MDYwMy4wIKXMDSoASAFQAw%3D%3D">Localização- Rua Estela, 268, 04011-001
+                    São Paulo - SP</a></p>
                     <p className="border-b-1">Horário de atendimento - 7 horas às 17 horas</p>
                     <h4 className="font-bold">MAIS</h4>
                     <p><Link href="/sobre" className="hover:text-gray-200 transition-colors">Nossa História</Link></p>
