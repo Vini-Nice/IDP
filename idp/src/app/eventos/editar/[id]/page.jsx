@@ -96,6 +96,8 @@ export default function EditarEvento({ params }) {
           if (formData[key]) {
             formDataToSend.append(key, formData[key]);
           }
+        } else if (key === 'texto') {
+          formDataToSend.append('descricao', formData[key]);
         } else {
           formDataToSend.append(key, formData[key]);
         }

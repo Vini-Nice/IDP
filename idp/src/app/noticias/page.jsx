@@ -66,9 +66,23 @@ useEffect(() => {
         router.push(`/Atualizar?id_noticias=${id}`);
     };
 
-    const handleDeletar = (id) => {
+    const handleDeletar = async (id) => {
         if (confirm('Tem certeza que deseja excluir esta notícia?')) {
-            router.push(`/Deletar?id_noticias=${id}`);
+            try {
+                const response = await fetch(`http://localhost:3001/noticias/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Falha ao excluir notícia');
+                }
+
+                // Atualiza a lista após excluir
+                fetchNoticias();
+            } catch (err) {
+                console.error('Erro ao excluir notícia:', err);
+                alert('Erro ao excluir notícia. Tente novamente.');
+            }
         }
     };
 
@@ -176,8 +190,8 @@ useEffect(() => {
                 {/* Grid de Notícias */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {noticias.map((noticia) => (
-                        <div key={noticia.id_noticias} className="group bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                            <Link href={`/noticias/${noticia.id_noticias}`} className="cursor-pointer">
+                        <div key={noticia.id_noticias} className="group bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full">
+                            <Link href={`/noticias/${noticia.id_noticias}`} className="cursor-pointer flex-grow">
                                 <div className="relative h-48 overflow-hidden">
                                     <Image
                                         src={getImageUrl(noticia.imagem)}
@@ -194,18 +208,18 @@ useEffect(() => {
                                 </div>
                             </Link>
 
-                            <div className="p-6">
+                            <div className="p-6 flex flex-col flex-grow">
                                 <Link href={`/noticias/${noticia.id_noticias}`}>
                                     <h2 className={`${merriweather.className} text-xl font-semibold text-gray-800 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300`}>
                                         {noticia.titulo}
                                     </h2>
                                 </Link>
                                 
-                                <p className={`${roboto.className} text-gray-600 mb-4 line-clamp-3`}>
+                                <p className={`${roboto.className} text-gray-600 mb-4 line-clamp-3 flex-grow`}>
                                     {noticia.descricao}
                                 </p>
 
-                                <div className="flex justify-between items-center">
+                                <div className="flex justify-between items-center mt-auto">
                                     <span className={`${roboto.className} text-sm text-gray-500`}>
                                         {new Date(noticia.data).toLocaleDateString('pt-BR')}
                                     </span>
