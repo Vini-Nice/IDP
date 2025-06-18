@@ -282,7 +282,7 @@ export default function Cadastro() {
             </div>
             <div className="text-center">
               <button
-                onClick={() => router.push('/login')}
+                onClick={() => router.push('/Login')}
                 className="text-blue-600 hover:text-blue-800 font-medium transition duration-200"
               >
                 Já tem uma conta? Entre aqui
